@@ -1,0 +1,286 @@
+@import "tailwindcss";
+/* Brand kit is the single source of truth: tokens, Tailwind bridge, foundations. */
+@import "../../assets/branding/system/tokens.css";
+@import "../../assets/branding/system/tailwind-v4.css";
+/* Layered so Tailwind utilities can still override element defaults (e.g. link color). */
+@import "../../assets/branding/system/base.css" layer(base);
+
+/* Theme is driven by [data-theme] on <html>; dark is the default. */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+/*
+ * App-level semantic aliases, composed from brand primitives and semantics.
+ * "Plate" tokens frame the visual studies, which are dark artworks and keep
+ * their own surface in both themes. "Inverse" is the opposite surface of the
+ * active theme, used for the light/dark chapter transition.
+ */
+:root {
+  --nm-font-sans: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --nm-font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --nm-plate-bg: var(--nm-color-graphite);
+  --nm-plate-fg: var(--nm-color-bone);
+  --nm-plate-fg-muted: var(--nm-color-steel);
+  --nm-plate-accent: var(--nm-color-signal);
+  --nm-plate-line: color-mix(in srgb, var(--nm-color-bone) 24%, transparent);
+  --nm-plate-scrim: color-mix(in srgb, var(--nm-color-graphite) 78%, transparent);
+  --nm-grid-line: color-mix(in srgb, var(--nm-border) 38%, transparent);
+  --nm-header-bg: color-mix(in srgb, var(--nm-bg) 92%, transparent);
+
+  --nm-inverse-bg: var(--nm-color-bone);
+  --nm-inverse-fg: var(--nm-color-graphite);
+  --nm-inverse-muted: #4b5661;
+  --nm-inverse-line: #ced2d2;
+  --nm-inverse-accent: #335d00;
+}
+
+:root[data-theme="light"] {
+  --nm-inverse-bg: var(--nm-color-graphite);
+  --nm-inverse-fg: var(--nm-color-bone);
+  --nm-inverse-muted: var(--nm-color-steel);
+  --nm-inverse-line: #34404a;
+  --nm-inverse-accent: var(--nm-color-signal);
+}
+
+@theme inline {
+  --color-background-subtle: var(--nm-bg-subtle);
+  --color-line-strong: var(--nm-border-strong);
+  --color-research-foreground: var(--nm-research-fg);
+  --color-accent-hover: var(--nm-accent-hover);
+  --color-link: var(--nm-link);
+  --color-grid: var(--nm-grid-line);
+  --color-header: var(--nm-header-bg);
+  --color-plate: var(--nm-plate-bg);
+  --color-plate-foreground: var(--nm-plate-fg);
+  --color-plate-muted: var(--nm-plate-fg-muted);
+  --color-plate-accent: var(--nm-plate-accent);
+  --color-plate-line: var(--nm-plate-line);
+  --color-plate-scrim: var(--nm-plate-scrim);
+  --color-plate-research: var(--nm-color-iris);
+  --color-inverse: var(--nm-inverse-bg);
+  --color-inverse-foreground: var(--nm-inverse-fg);
+  --color-inverse-muted: var(--nm-inverse-muted);
+  --color-inverse-line: var(--nm-inverse-line);
+  --color-inverse-accent: var(--nm-inverse-accent);
+
+  --text-display: var(--nm-text-display);
+  --text-display--line-height: var(--nm-leading-tight);
+  --text-display--letter-spacing: var(--nm-tracking-tight);
+  --text-headline: var(--nm-text-4xl);
+  --text-headline--line-height: var(--nm-leading-tight);
+  --text-headline--letter-spacing: var(--nm-tracking-tight);
+  /* Poster scale: chapter statements that span the viewport. */
+  --text-poster: clamp(3.75rem, 13.2vw, 15rem);
+  --text-poster--line-height: 0.86;
+  --text-poster--letter-spacing: -0.055em;
+  --text-statement: clamp(2.5rem, 6.4vw, 6.5rem);
+  --text-statement--line-height: 0.95;
+  --text-statement--letter-spacing: -0.045em;
+
+  --tracking-label: var(--nm-tracking-label);
+  --tracking-tightest: var(--nm-tracking-tight);
+  --tracking-snug: var(--nm-tracking-normal);
+  --leading-tight: var(--nm-leading-tight);
+  --leading-heading: var(--nm-leading-heading);
+  --leading-body: var(--nm-leading-body);
+
+  --radius-xs: var(--nm-radius-xs);
+  --radius-sm: var(--nm-radius-sm);
+  --radius-md: var(--nm-radius-md);
+  --radius-lg: var(--nm-radius-lg);
+  --radius-xl: var(--nm-radius-xl);
+
+  --container-content: var(--nm-content-width);
+  --container-copy: var(--nm-copy-width);
+
+  --ease-standard: var(--nm-ease-standard);
+  --ease-nm-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --default-transition-duration: var(--nm-duration-base);
+  --default-transition-timing-function: var(--nm-ease-standard);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  /* Lenis drives scrolling; native smooth scrolling would fight it. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis:not(.lenis-autoToggle).lenis-stopped {
+    overflow: clip;
+  }
+
+  /* While Lenis is active it owns smoothing; native smooth scroll would race it. */
+  html.lenis {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    transition:
+      background-color var(--nm-duration-base) var(--nm-ease-standard),
+      color var(--nm-duration-base) var(--nm-ease-standard);
+  }
+
+  /* SplitText masks: keep descenders and accents inside the clip. */
+  .nm-line-mask {
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer components {
+  .nm-wide {
+    width: calc(100% - 2 * var(--nm-gutter));
+    margin-inline: auto;
+  }
+
+  /* Extends the kit's .nm-button with interaction states. */
+  .nm-button {
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background var(--nm-duration-base) var(--nm-ease-standard),
+      color var(--nm-duration-base) var(--nm-ease-standard),
+      border-color var(--nm-duration-base) var(--nm-ease-standard);
+  }
+
+  .nm-button--primary:hover {
+    background: var(--nm-accent-hover);
+  }
+
+  .nm-button--secondary:hover {
+    border-color: var(--nm-fg);
+  }
+
+  /* Animated underline: draws in from the left, leaves to the right. */
+  .nm-link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .nm-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.15em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 450ms var(--ease-nm-out);
+  }
+
+  .nm-link:hover::after,
+  .nm-link:focus-visible::after,
+  .nm-link[aria-current="true"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /*
+   * Scrollytelling: a tall track with a viewport-high sticky stage. With
+   * reduced motion the track collapses and the stage flows normally, so no
+   * chapter ever holds the reader in place.
+   */
+  .nm-track {
+    position: relative;
+    height: var(--track, 300svh);
+  }
+
+  .nm-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nm-track {
+      height: auto;
+    }
+
+    .nm-stage {
+      position: relative;
+      height: auto;
+      min-height: 100svh;
+      overflow: visible;
+    }
+  }
+
+  /* Technical rails: a 12-column measure drawn behind compositions. */
+  .nm-rails {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--rails, 12), 1fr);
+    pointer-events: none;
+  }
+
+  .nm-rails > span {
+    border-left: 1px solid var(--nm-grid-line);
+    transform-origin: top;
+  }
+
+  .nm-rails > span:last-child {
+    border-right: 1px solid var(--nm-grid-line);
+  }
+
+  .nm-corners {
+    position: absolute;
+    pointer-events: none;
+    background:
+      linear-gradient(currentColor, currentColor) top left / 12px 1px,
+      linear-gradient(currentColor, currentColor) top left / 1px 12px,
+      linear-gradient(currentColor, currentColor) top right / 12px 1px,
+      linear-gradient(currentColor, currentColor) top right / 1px 12px,
+      linear-gradient(currentColor, currentColor) bottom left / 12px 1px,
+      linear-gradient(currentColor, currentColor) bottom left / 1px 12px,
+      linear-gradient(currentColor, currentColor) bottom right / 12px 1px,
+      linear-gradient(currentColor, currentColor) bottom right / 1px 12px;
+    background-repeat: no-repeat;
+  }
+}
+
+@keyframes nm-scan {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.01% {
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+/*
+ * Opening-sequence elements start hidden only when motion is accepted; the
+ * intro timeline reveals them. The failsafe guarantees visibility even if
+ * scripts never run.
+ */
+@keyframes nm-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+
+.nm-motion [data-intro] {
+  visibility: hidden;
+  animation: nm-failsafe 0s 3.5s forwards;
+}
