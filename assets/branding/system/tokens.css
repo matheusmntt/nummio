@@ -1,0 +1,131 @@
+/* Nummio Design System 1.1 — source of truth. Import once in app/globals.css. */
+:root {
+  color-scheme: dark;
+  /* Primitive palette: brand hues never change with theme */
+  --nm-color-graphite: #0B0F14;
+  --nm-color-charcoal: #151B22;
+  --nm-color-bone: #F2F1ED;
+  --nm-color-signal: #B7FF63;
+  --nm-color-iris: #A38CFF;
+  --nm-color-steel: #A5A9B8;
+  --nm-color-white: #FFFFFF;
+  --nm-color-black: #000000;
+
+  --nm-font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --nm-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --nm-text-xs: 0.75rem;
+  --nm-text-sm: 0.875rem;
+  --nm-text-base: 1rem;
+  --nm-text-lg: 1.125rem;
+  --nm-text-xl: 1.25rem;
+  --nm-text-2xl: 1.5rem;
+  --nm-text-3xl: 2rem;
+  --nm-text-4xl: clamp(2.5rem, 5vw, 4rem);
+  --nm-text-display: clamp(3.5rem, 8vw, 7.5rem);
+  --nm-leading-tight: 1.05;
+  --nm-leading-heading: 1.15;
+  --nm-leading-body: 1.6;
+  --nm-tracking-tight: -0.045em;
+  --nm-tracking-normal: -0.015em;
+  --nm-tracking-label: 0.12em;
+  --nm-weight-regular: 400;
+  --nm-weight-medium: 500;
+  --nm-weight-semibold: 600;
+  --nm-weight-bold: 700;
+
+  --nm-space-0: 0;
+  --nm-space-1: 0.25rem;
+  --nm-space-2: 0.5rem;
+  --nm-space-3: 0.75rem;
+  --nm-space-4: 1rem;
+  --nm-space-5: 1.25rem;
+  --nm-space-6: 1.5rem;
+  --nm-space-8: 2rem;
+  --nm-space-10: 2.5rem;
+  --nm-space-12: 3rem;
+  --nm-space-16: 4rem;
+  --nm-space-20: 5rem;
+  --nm-space-24: 6rem;
+  --nm-space-32: 8rem;
+  --nm-radius-xs: 0.25rem;
+  --nm-radius-sm: 0.375rem;
+  --nm-radius-md: 0.625rem;
+  --nm-radius-lg: 1rem;
+  --nm-radius-xl: 1.5rem;
+  --nm-radius-full: 9999px;
+  --nm-border-width: 1px;
+  --nm-content-width: 76rem;
+  --nm-copy-width: 46rem;
+  --nm-gutter: clamp(1rem, 4vw, 4rem);
+  --nm-z-header: 30;
+  --nm-z-overlay: 50;
+  --nm-duration-fast: 120ms;
+  --nm-duration-base: 200ms;
+  --nm-duration-slow: 400ms;
+  --nm-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Default: dark / graphite */
+  --nm-bg: #0B0F14;
+  --nm-bg-subtle: #10161C;
+  --nm-surface: #151B22;
+  --nm-surface-raised: #1D252E;
+  --nm-fg: #F2F1ED;
+  --nm-fg-muted: #A5A9B8;
+  --nm-fg-subtle: #89949F;
+  --nm-border: #34404A;
+  --nm-border-strong: #58636D;
+  --nm-accent: #B7FF63;
+  --nm-accent-fg: #0B0F14;
+  --nm-accent-hover: #CCFF98;
+  --nm-research: #A38CFF;
+  --nm-research-fg: #0B0F14;
+  --nm-link: #B7FF63;
+  --nm-focus: #B7FF63;
+  --nm-selection-bg: #B7FF63;
+  --nm-selection-fg: #0B0F14;
+  --nm-backdrop: rgb(0 0 0 / 72%);
+  --nm-shadow-sm: 0 2px 12px rgb(0 0 0 / 18%);
+  --nm-shadow-lg: 0 24px 65px rgb(0 0 0 / 35%);
+
+  /* Component aliases (must use semantics, not raw brand hues) */
+  --nm-button-primary-bg: var(--nm-accent);
+  --nm-button-primary-fg: var(--nm-accent-fg);
+  --nm-button-secondary-bg: var(--nm-surface);
+  --nm-button-secondary-fg: var(--nm-fg);
+  --nm-card-bg: var(--nm-surface);
+  --nm-card-border: var(--nm-border);
+  --nm-input-bg: var(--nm-bg-subtle);
+  --nm-input-border: var(--nm-border-strong);
+  --nm-label-fg: var(--nm-fg-muted);
+}
+
+/* .light and [data-theme] both supported; choose one convention in the app. */
+:root[data-theme="light"], .light {
+  color-scheme: light;
+  --nm-bg: #F2F1ED;
+  --nm-bg-subtle: #EAE9E4;
+  --nm-surface: #FFFFFF;
+  --nm-surface-raised: #F9F8F5;
+  --nm-fg: #0B0F14;
+  --nm-fg-muted: #4B5661;
+  --nm-fg-subtle: #59636D;
+  --nm-border: #CED2D2;
+  --nm-border-strong: #8C969A;
+  /* Darker functional green to maintain contrast on light surfaces */
+  --nm-accent: #335D00;
+  --nm-accent-fg: #FFFFFF;
+  --nm-accent-hover: #284900;
+  --nm-research: #5B3CC2;
+  --nm-research-fg: #FFFFFF;
+  --nm-link: #335D00;
+  --nm-focus: #335D00;
+  --nm-selection-bg: #D4F0AD;
+  --nm-selection-fg: #0B0F14;
+  --nm-backdrop: rgb(11 15 20 / 45%);
+  --nm-shadow-sm: 0 2px 12px rgb(11 15 20 / 7%);
+  --nm-shadow-lg: 0 24px 65px rgb(11 15 20 / 13%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --nm-duration-fast: 0ms; --nm-duration-base: 0ms; --nm-duration-slow: 0ms; }
+}

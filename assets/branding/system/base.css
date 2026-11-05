@@ -1,0 +1,17 @@
+/* Optional unopinionated foundations. Import after tokens.css. */
+html { background: var(--nm-bg); scroll-behavior: smooth; }
+body { margin: 0; background: var(--nm-bg); color: var(--nm-fg); font: 400 var(--nm-text-base)/var(--nm-leading-body) var(--nm-font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--nm-selection-bg); color: var(--nm-selection-fg); }
+a { color: var(--nm-link); text-underline-offset: .18em; }
+:focus-visible { outline: 2px solid var(--nm-focus); outline-offset: 3px; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+img, svg { max-width: 100%; }
+.nm-container { width: min(calc(100% - 2 * var(--nm-gutter)), var(--nm-content-width)); margin-inline: auto; }
+.nm-display { font-size: var(--nm-text-display); font-weight: 600; line-height: var(--nm-leading-tight); letter-spacing: var(--nm-tracking-tight); }
+.nm-eyebrow { font: 500 var(--nm-text-xs)/1.4 var(--nm-font-mono); letter-spacing: var(--nm-tracking-label); text-transform: uppercase; }
+.nm-card { background: var(--nm-card-bg); border: 1px solid var(--nm-card-border); border-radius: var(--nm-radius-lg); }
+.nm-button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: var(--nm-space-2); padding: 0 var(--nm-space-5); border-radius: var(--nm-radius-sm); font-weight: 600; transition: background var(--nm-duration-base) var(--nm-ease-standard), color var(--nm-duration-base) var(--nm-ease-standard); }
+.nm-button--primary { border: 1px solid transparent; background: var(--nm-button-primary-bg); color: var(--nm-button-primary-fg); }
+.nm-button--secondary { border: 1px solid var(--nm-border-strong); background: var(--nm-button-secondary-bg); color: var(--nm-button-secondary-fg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
