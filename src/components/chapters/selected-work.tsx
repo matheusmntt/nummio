@@ -8,6 +8,9 @@ import { ConstructedDrawing, openingFocus } from "../constructed-drawing";
 import { ProjectFigure } from "./project-figure";
 import { FigureCaption } from "../figure-caption";
 
+const drawingAlt =
+  "Axonometric drawing of a board-formed concrete volume with a deep square opening, on a ground slab, with grid axes and dimension lines.";
+
 /*
  * Chapter 04. Constructed Forms. On large screens the chapter becomes a
  * horizontal gallery: the vertical scroll drives a track of project
@@ -115,7 +118,7 @@ export function SelectedWork() {
               <div className="relative aspect-square w-full sm:aspect-[4/3]">
                 <div aria-hidden className="nm-corners inset-0 text-line-strong" />
                 <ConstructedDrawing className="absolute inset-3 size-[calc(100%-1.5rem)] md:inset-5 md:size-[calc(100%-2.5rem)]" />
-                <span className="sr-only">{art.constructed.alt}</span>
+                <span className="sr-only">{drawingAlt}</span>
               </div>
               <FigureCaption>
                 <span className="text-accent">Fig. 04 — {art.constructed.title}</span>

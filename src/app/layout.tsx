@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: tokens.themes.dark.background,
+  themeColor: tokens.themes.signalCore.semantic.bgCanvas,
   colorScheme: "dark light",
 };
 

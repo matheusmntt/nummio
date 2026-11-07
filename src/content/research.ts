@@ -29,4 +29,11 @@ export const researchLines: readonly ResearchLine[] = [
     summary:
       "How things hold together. Constraints, architecture and craft: the discipline of turning a model into something that bears load.",
   },
+  {
+    art: "interface",
+    title: "Kinetic Interfaces",
+    axes: ["Interfaces", "Motion", "Latency"],
+    summary:
+      "How a system meets the hand. Layered interfaces, motion and response time: the craft of making fast software feel immediate.",
+  },
 ];

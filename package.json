@@ -10,8 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "pnpm lint && pnpm typecheck && pnpm build",
-    "brand:sync": "node scripts/sync-brand-assets.mjs",
-    "studies:render": "node scripts/render-studies.mjs"
+    "brand:sync": "node scripts/sync-brand-assets.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

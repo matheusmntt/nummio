@@ -5,11 +5,11 @@ import symbolDark from "@brand/icons/nummio-symbol-dark.svg";
 import symbolLight from "@brand/icons/nummio-symbol-light.svg";
 
 /*
- * Glyph bounds inside the kit's 570×191 wordmark artboard. The artwork is
+ * Glyph bounds inside the kit's 504×140 wordmark artboard. The artwork is
  * framed to these bounds so layout spacing (and the clear space around the
  * logo) is controlled by the page, not by the file's padding.
  */
-const WORDMARK = { width: 570, height: 191, x: 25, y: 63.3, glyphWidth: 463.1, glyphHeight: 93.2 };
+const WORDMARK = { width: 504, height: 140, x: 26.25, y: 23.25, glyphWidth: 457.75, glyphHeight: 93.25 };
 
 type BrandMarkProps = {
   variant?: "wordmark" | "symbol";

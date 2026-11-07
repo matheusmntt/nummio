@@ -14,8 +14,8 @@ const facts = [
   { term: "Domain", detail: site.domain },
 ] as const;
 
-/** Geometry of the official symbol (assets/branding/icons/nummio-symbol-*.svg). */
-const SYMBOL_N = "M22 78 V22 H34 L68 61 V22 H80 V78 H68 L34 39 V78 Z";
+/** Geometry of the official symbol (assets/v2/icons/nummio-symbol-*.svg). */
+const SYMBOL_N = "M20 80 V20 H33.5 L66.5 58.5 V35 H80 V80 H66.5 L33.5 41.5 V80 Z";
 
 /*
  * Chapter 06. The page turns to the opposite surface: a light reading room
@@ -83,7 +83,7 @@ export function Philosophy() {
             <svg viewBox="0 0 100 100" aria-hidden className="size-full overflow-visible">
               <path data-symbol-fill d={SYMBOL_N} fill="currentColor" />
               <path data-symbol-stroke d={SYMBOL_N} fill="none" stroke="currentColor" strokeWidth="0.6" />
-              <rect data-symbol-block x="75" y="13" width="13" height="13" rx="1.8" fill="var(--nm-inverse-accent)" />
+              <rect data-symbol-block x="66.5" y="15" width="15.5" height="15.5" rx="3.2" fill="var(--nm-inverse-accent)" />
             </svg>
           </div>
         </div>

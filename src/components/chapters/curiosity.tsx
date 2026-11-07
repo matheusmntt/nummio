@@ -33,7 +33,7 @@ export function Curiosity() {
         });
 
         tl.fromTo(q("[data-frame]"), { clipPath: SLIT }, { clipPath: OPEN, duration: 1, ease: "power2.inOut" }, 0)
-          // Kept close to 1: the study is a 1600px source, so heavy zoom would soften it.
+          // Kept close to 1: the study is a small source, so heavy zoom would soften it.
           .fromTo(q("[data-frame-image]"), { scale: 1.16, yPercent: -3 }, { scale: 1, yPercent: 0, duration: 3 }, 0)
           .fromTo(q("[data-ghost]"), { xPercent: 12 }, { xPercent: -28, duration: 3 }, 0)
           .from(q("[data-kicker] > *"), { yPercent: 120, opacity: 0, duration: 0.4, stagger: 0.08, ease: ease.out }, 0.1)
@@ -81,12 +81,11 @@ export function Curiosity() {
                 placeholder="blur"
                 quality={artQuality}
                 sizes="(min-width: 1024px) min(40vw, 40rem), (min-width: 768px) 44vw, 100vw"
-                className="object-cover object-[62%_30%]"
+                className="object-cover object-[85%_30%] md:max-lg:object-[72%_30%]"
               />
             </div>
-            {/* The study's ground is graphite: let the drapery fall away into it. */}
+            {/* The study's ground is graphite: let the shoulders fall away into it. */}
             <div aria-hidden className="absolute inset-x-0 -bottom-1 h-1/4 bg-linear-to-t from-plate to-transparent" />
-            <div aria-hidden className="absolute inset-y-0 -right-1 w-1/5 bg-linear-to-l from-plate to-transparent" />
           </div>
           <FigureCaption className="max-md:hidden">
             <span>

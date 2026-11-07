@@ -1,12 +1,12 @@
-// Copies production assets out of the brand kit. The kit in assets/branding
-// stays untouched and remains the source of truth; rerun after updating it.
+// Copies production assets out of the brand kit. The kit in assets/v2 stays
+// untouched and remains the source of truth; rerun after updating it.
 import { copyFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const kit = join(root, "assets/branding");
+const kit = join(root, "assets/v2");
 
 const copies = [
   // Next.js metadata file conventions (src/app)
@@ -28,30 +28,49 @@ for (const [from, to] of copies) {
 }
 
 /*
- * Web crops of the v2 visual studies in assets/studies (see its README for
- * how each master was made). Rectangles are in master pixels.
+ * Web crops of the kit's visual studies. The text-free `raw/` renders and the
+ * WQHD wallpapers are used, never the captioned studies; wallpaper regions
+ * stop above the kit's signature in the bottom-right corner. Rectangles are in
+ * master pixels.
  *
  * `grade` lifts the master's blacks to the brand graphite, so the artwork's
  * ground matches the page and plates exactly. `upscale` resamples small
  * masters 2× with Lanczos and light sharpening, so browsers downsample a
  * clean image instead of stretching a small one.
  */
-const studies = join(root, "assets/studies");
 const GRAPHITE = { r: 11, g: 15, b: 20 };
+const imagery = join(kit, "imagery");
+const manifold = "wallpapers/wallpaper-03-computational-manifold-2560x1440.jpg";
 
 const crops = [
-  { from: "classical-intelligence.png", to: "classical-tall.jpg", grade: true, upscale: true },
-  { from: "computational-forms.png", to: "computational-wide.jpg", region: { left: 0, top: 180, width: 3200, height: 1520 } },
-  { from: "computational-forms.png", to: "computational-portrait.jpg", region: { left: 800, top: 200, width: 1400, height: 1560 } },
+  {
+    from: "raw/classical-intelligence-raw.jpg",
+    to: "classical-tall.jpg",
+    region: { left: 330, top: 0, width: 840, height: 768 },
+    grade: true,
+    upscale: true,
+  },
+  { from: manifold, to: "computational-wide.jpg", region: { left: 0, top: 0, width: 2560, height: 1340 }, grade: true },
+  { from: manifold, to: "computational-portrait.jpg", region: { left: 640, top: 0, width: 1280, height: 1340 }, grade: true },
+  {
+    from: "raw/constructed-forms-raw.jpg",
+    to: "constructed-plate.jpg",
+    region: { left: 413, top: 0, width: 894, height: 768 },
+    upscale: true,
+  },
+  {
+    from: "wallpapers/wallpaper-01-kinetic-ui-2560x1440.jpg",
+    to: "interface-plate.jpg",
+    region: { left: 512, top: 0, width: 1536, height: 1340 },
+    grade: true,
+  },
 ];
 
 const artDir = join(root, "src/assets/art");
 mkdirSync(artDir, { recursive: true });
 
 for (const { from, to, region, grade = false, upscale = false } of crops) {
-  let image = sharp(join(studies, from)).removeAlpha();
-  if (region) image = image.extract(region);
-  let buffer = await image.toBuffer();
+  let buffer = await sharp(join(imagery, from)).removeAlpha().extract(region).toBuffer();
   if (grade) {
     const { width, height } = await sharp(buffer).metadata();
     buffer = await sharp(buffer)
@@ -64,5 +83,5 @@ for (const { from, to, region, grade = false, upscale = false } of crops) {
     output = output.resize({ width: width * 2, kernel: "lanczos3" }).sharpen({ sigma: 0.9, m1: 0.6, m2: 1.4 });
   }
   await output.jpeg({ quality: 92, mozjpeg: true }).toFile(join(artDir, to));
-  console.log(`studies: ${from} -> src/assets/art/${to}`);
+  console.log(`imagery: ${from} -> src/assets/art/${to}`);
 }
