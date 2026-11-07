@@ -77,7 +77,7 @@ export function Arrival() {
       tabIndex={-1}
       aria-labelledby="hero-title"
       data-chapter="01"
-      className="nm-track [--track:200svh]"
+      className="nm-track [--track:150svh] md:[--track:200svh]"
     >
       <div data-stage className="nm-stage isolate">
         {/* Field, with the static study as a fallback where WebGL is unavailable. */}
