@@ -4,7 +4,9 @@
 - **Nome**: **Nummio** (grafado em caixa-baixa `nummio.` no wordmark tipográfico).
 - **Assinatura**: **Curiosity, engineered.**
 - **Narrativa Operacional**: `Explorar → Compreender → Construir` (`Explore. Understand. Build.`).
-- **Foco Estratégico (v2.0)**: Laboratório independente de engenharia de software, pesquisa aplicada e **interfaces de usuário de alta performance (120Hz Modern UI/UX)**.
+- **Posicionamento**: **Independent technology lab**. Hub de tecnologia e inovação: produtos próprios (SaaS), desenvolvimento para empresas e pesquisa aplicada.
+- **Método**: `Explore → Understand → Build`, que transforma `Curiosity → Questions → Models → Tools`.
+- **Nota (v2.0)**: os princípios de UI/UX de alta performance (seção 4) são o padrão de execução do nummio.dev e das interfaces da Nummio, não o posicionamento da marca.
 
 ---
 

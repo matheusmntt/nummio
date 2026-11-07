@@ -10,7 +10,6 @@ const facts = [
   { term: "Type", detail: site.descriptor },
   { term: "Focus", detail: "Software, applied research" },
   { term: "Method", detail: "Explore → Understand → Build" },
-  { term: "Structure", detail: "Nummio · Nummio Labs · Nummio Research" },
   { term: "Domain", detail: site.domain },
 ] as const;
 

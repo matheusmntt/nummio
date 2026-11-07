@@ -51,8 +51,6 @@ export function SiteFooter() {
                   {site.domain}
                 </a>
               </li>
-              <li className="flex min-h-11 items-center">Nummio Labs</li>
-              <li className="flex min-h-11 items-center">Nummio Research</li>
             </ul>
           </div>
         </div>

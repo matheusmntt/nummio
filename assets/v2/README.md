@@ -2,7 +2,8 @@
 
 Marca: **Nummio** · `nummio.dev`  
 Assinatura: **Curiosity, engineered.**  
-Posicionamento: **High-Performance Modern UI/UX Engineering, Software & Applied Research Lab**
+Posicionamento: **Independent technology lab**  
+Escopo do site: o nummio.dev é construído como uma interface de alta performance (Modern UI/UX engineering). Isso descreve o padrão de execução do site, não o posicionamento da marca.
 
 ---
 
