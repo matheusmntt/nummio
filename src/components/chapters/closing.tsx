@@ -62,7 +62,7 @@ export function Closing() {
         <h2 id="closing-title" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.055em]">
           <span data-closing-line="1" className="block whitespace-nowrap">
             Ideas into
-          </span>
+          </span>{" "}
           <span className="flex items-end justify-end gap-[0.06em] whitespace-nowrap">
             <span data-closing-line="2" className="block">
               existence
