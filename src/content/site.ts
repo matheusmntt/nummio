@@ -15,6 +15,7 @@ export type NavItem = {
 
 export const primaryNav: readonly NavItem[] = [
   { label: "Approach", href: "#approach" },
+  { label: "Practice", href: "#practice" },
   { label: "About", href: "#about" },
 ];
 
@@ -26,13 +27,14 @@ export type Chapter = {
 };
 
 /**
- * The homepage reads as one continuous narrative, Thought → Computation →
- * Construction. Chapters drive the progress rail and the header readout.
+ * The homepage reads as one continuous narrative, Curiosity → Questions →
+ * Models → Tools. Chapters drive the progress rail and the header readout.
  */
 export const chapters: readonly Chapter[] = [
   { id: "top", index: "01", label: "Arrival" },
   { id: "curiosity", index: "02", label: "Curiosity" },
   { id: "approach", index: "03", label: "Method" },
-  { id: "about", index: "04", label: "Philosophy" },
-  { id: "closing", index: "05", label: "Closing" },
+  { id: "practice", index: "04", label: "Practice" },
+  { id: "about", index: "05", label: "Philosophy" },
+  { id: "closing", index: "06", label: "Closing" },
 ];

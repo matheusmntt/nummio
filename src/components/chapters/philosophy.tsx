@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import { site } from "@/content/site";
 import { duration, ease, gsap, media, useGSAP } from "@/lib/motion";
+import { Reveal } from "../motion/reveal";
 import { RevealText } from "../motion/reveal-text";
 import { ScrollWords } from "../motion/scroll-words";
 
 const facts = [
   { term: "Type", detail: site.descriptor },
-  { term: "Focus", detail: "Software, applied research" },
+  { term: "Fronts", detail: "Products · Partners · Research" },
   { term: "Method", detail: "Explore → Understand → Build" },
   { term: "Domain", detail: site.domain },
 ] as const;
@@ -17,7 +18,7 @@ const facts = [
 const SYMBOL_N = "M20 80 V20 H33.5 L66.5 58.5 V35 H80 V80 H66.5 L33.5 41.5 V80 Z";
 
 /*
- * Chapter 04. The page turns to the opposite surface: a light reading room
+ * Chapter 05. The page turns to the opposite surface: a light reading room
  * in the dark theme (and the reverse in light). The Nummio symbol is drawn,
  * filled and finally receives its block, the lab's mark assembled in place.
  */
@@ -62,12 +63,12 @@ export function Philosophy() {
   );
 
   return (
-    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="04" className="relative isolate text-inverse-foreground">
+    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="05" className="relative isolate text-inverse-foreground">
       <div aria-hidden data-surface className="absolute inset-0 -z-10 bg-inverse" />
       <div className="nm-wide py-24 md:py-36">
         <div className="flex items-center justify-between font-mono text-meta tracking-label text-inverse-muted uppercase">
           <p>
-            <span className="text-inverse-accent">N/04</span> — Philosophy
+            <span className="text-inverse-accent">N/05</span> — Philosophy
           </p>
           <p aria-hidden>Explore → Understand → Build</p>
         </div>
@@ -77,6 +78,12 @@ export function Philosophy() {
             <RevealText as="h2" id="about-title" className="text-[clamp(3rem,8.4vw,9.5rem)] leading-[0.9] font-semibold tracking-[-0.05em] text-balance">
               An independent lab, by design.
             </RevealText>
+            <Reveal className="mt-10 md:mt-14" delay={0.2}>
+              <p className="text-xl font-medium tracking-snug md:text-2xl">One method for everything we make.</p>
+              <p className="mt-3 font-mono text-xs tracking-label text-inverse-muted uppercase md:text-sm">
+                Curiosity → Questions → Models → Tools
+              </p>
+            </Reveal>
           </div>
           <div data-symbol className="relative hidden aspect-square w-full max-w-72 self-end justify-self-end lg:col-span-4 lg:block">
             <svg viewBox="0 0 100 100" aria-hidden className="size-full overflow-visible">

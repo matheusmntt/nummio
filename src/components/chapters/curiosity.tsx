@@ -152,7 +152,7 @@ export function Curiosity() {
               <p>
                 <span className="text-muted">Out</span> Questions
               </p>
-              <p className="ml-auto">Thought → Computation → Construction</p>
+              <p className="ml-auto">Curiosity → Questions → Models → Tools</p>
             </div>
           </div>
         </div>

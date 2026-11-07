@@ -6,7 +6,7 @@ import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
 const ticker = ["Explore", "Understand", "Build", "Curiosity, engineered"];
 
 /*
- * Chapter 05. A final statement built letter by letter as the reader
+ * Chapter 06. A final statement built letter by letter as the reader
  * arrives, closed by the brand's square block, then handed to the footer.
  */
 export function Closing() {
@@ -48,24 +48,24 @@ export function Closing() {
       id="closing"
       tabIndex={-1}
       aria-labelledby="closing-title"
-      data-chapter="05"
+      data-chapter="06"
       className="nm-track [--track:170svh]"
     >
       <div className="nm-stage flex flex-col">
         <div data-closing-meta className="nm-wide flex justify-between pt-24 font-mono text-meta tracking-label text-muted uppercase md:pt-28">
           <p>
-            <span className="text-accent">N/05</span> — Closing
+            <span className="text-accent">N/06</span> — Closing
           </p>
-          <p aria-hidden className="max-sm:hidden">Thought → Computation → Construction</p>
+          <p aria-hidden className="max-sm:hidden">Curiosity → Questions → Models → Tools</p>
         </div>
 
         <h2 id="closing-title" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.055em]">
           <span data-closing-line="1" className="block whitespace-nowrap">
-            Ideas into
+            Start with
           </span>{" "}
           <span className="flex items-end justify-end gap-[0.06em] whitespace-nowrap">
             <span data-closing-line="2" className="block">
-              existence
+              a question
             </span>
             <span aria-hidden data-closing-block className="mb-[0.12em] inline-block size-[0.17em] shrink-0 rounded-xs bg-accent" />
           </span>
