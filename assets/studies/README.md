@@ -1,6 +1,6 @@
 # Visual studies (lab masters)
 
-Masters made for the lab, alongside the brand kit's imagery in `assets/v2/`.
+Masters made for the lab, alongside the brand kit's imagery in `assets/imagery/`.
 They are cut into web crops by `pnpm brand:sync`.
 
 | File | Origin |

@@ -71,7 +71,7 @@ const send = (method, params = {}) =>
   });
 
 await send("Runtime.enable");
-const outDir = join(root, "assets/v2/social");
+const outDir = join(root, "assets/social");
 mkdirSync(outDir, { recursive: true });
 
 for (const card of cards) {
@@ -89,7 +89,7 @@ for (const card of cards) {
     clip: { x: 0, y: 0, width: card.width, height: card.height, scale: 1 },
   });
   writeFileSync(join(outDir, card.out), Buffer.from(shot.result.data, "base64"));
-  console.log(`social: ${card.kind} -> assets/v2/social/${card.out}`);
+  console.log(`social: ${card.kind} -> assets/social/${card.out}`);
 }
 
 ws.close();

@@ -25,11 +25,11 @@ Escopo do site: o nummio.dev é construído como uma interface de alta performan
 4. **Engenharia de Prompts Documentada (`system/prompts.md`)**:
    - Matriz modular de prompts para geração consistente de ativos 3D/fotográficos e variações por tema.
 5. **Interactive Brand & UI/UX Explorer (`showcase.html`)**:
-   - Abra `v2/showcase.html` no navegador para testar os 4 temas de cores em tempo real sobre componentes de UI de alta performance, comparar os logos e copiar tokens com 1 clique.
+   - Abra `showcase.html` no navegador para testar os 4 temas de cores em tempo real sobre componentes de UI de alta performance, comparar os logos e copiar tokens com 1 clique.
 
 ---
 
-## Estrutura de Pastas (`/v2`)
+## Estrutura de Pastas (`assets/`)
 
 - `logo/`: Wordmarks e Lockups horizontais em SVG e PNG Retina (`dark`, `light`, `light-signal`, `mono-white`, `mono-black`, `infrared`, `cyan`).
 - `icons/`: Símbolos modulares em SVG/PNG, favicons (`favicon.ico`, `favicon.svg`) e ícones de aplicação (`16px` a `512px`).
@@ -37,6 +37,9 @@ Escopo do site: o nummio.dev é construído como uma interface de alta performan
 - `social/`: Open Graph (`1200×630`), GitHub Banner (`1500×500`) e prancha comparativa dos 4 temas de tokens (`color-tokens-themes-1600x900.png`).
 - `system/`: `tokens.css`, `tokens.json`, `brand-guidelines.md`, `prompts.md` e `fonts-links.md`.
 - `showcase.html`: Aplicação interativa de demonstração do Brand Kit & Design System v2.0.
+- `studies/`: masters próprios do laboratório (fora do kit), com procedência em `studies/README.md`.
+
+No site, `pnpm brand:sync` gera os ícones, o card social e os recortes web a partir desta pasta. Os tokens CSS que o site usa ficam em `src/styles/` (o `system/tokens.css` daqui é a referência multi-tema do kit).
 
 
 ---
@@ -45,7 +48,7 @@ Escopo do site: o nummio.dev é construído como uma interface de alta performan
 
 Sem remover nenhum arquivo anterior, o kit foi incrementado com **8 novos estudos visuais (`05` a `12`)**, **6 wallpapers WQHD (`2560×1440`)**, **panoramas comparativos** e **7 novos cartões sociais multi-tema**:
 
-### Novos Estudos Visuais (`v2/imagery/`)
+### Novos Estudos Visuais (`imagery/`)
 - `optical-typography.jpg` (**Study 05**): Monograma `N` em prisma de vidro óptico fumê refratando cáusticas em `#B7FF63` e `#A38CFF`.
 - `tactile-hardware.jpg` (**Study 06**): Dial rotativo em titânio CNC recartilhado a diamante com anel de safira e índice laser `#B7FF63`.
 - `neural-topology.jpg` (**Study 07**): Topologia 3D de grafos distribuídos com poliedros de vidro fumê e caminho computacional luminoso.
@@ -60,7 +63,7 @@ Sem remover nenhum arquivo anterior, o kit foi incrementado com **8 novos estudo
   - `imagery/themes/`: Subpasta dedicada com os 4 estudos visuais de cada tema de token.
   - `imagery/wallpapers/`: 6 Wallpapers Desktop/Hero em resolução **WQHD (`2560×1440`)**.
 
-### Novas Variações Sociais (`v2/social/`)
+### Novas Variações Sociais (`social/`)
 - `open-graph-v2-optical-prism-1200x630.png`
 - `open-graph-v3-cyber-infrared-1200x630.png`
 - `open-graph-v4-quantum-cyan-1200x630.png`

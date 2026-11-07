@@ -1,4 +1,4 @@
-// Copies production assets out of the brand kit. The kit in assets/v2 stays
+// Copies production assets out of the brand kit. The kit in assets/ stays
 // untouched and remains the source of truth; rerun after updating it.
 import { copyFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const kit = join(root, "assets/v2");
+const kit = join(root, "assets");
 
 const copies = [
   // Next.js metadata file conventions (src/app)

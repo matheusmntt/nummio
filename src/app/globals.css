@@ -1,9 +1,9 @@
 @import "tailwindcss";
-/* Brand kit is the single source of truth: tokens, Tailwind bridge, foundations. */
-@import "../../assets/branding/system/tokens.css";
-@import "../../assets/branding/system/tailwind-v4.css";
+/* The site's design system layer: tokens, Tailwind bridge, foundations (src/styles). */
+@import "../styles/tokens.css";
+@import "../styles/tailwind-v4.css";
 /* Layered so Tailwind utilities can still override element defaults (e.g. link color). */
-@import "../../assets/branding/system/base.css" layer(base);
+@import "../styles/base.css" layer(base);
 
 /* Theme is driven by [data-theme] on <html>; dark is the default. */
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));

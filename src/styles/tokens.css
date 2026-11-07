@@ -1,4 +1,4 @@
-/* Nummio Design System 1.1 — source of truth. Import once in app/globals.css. */
+/* Nummio Design System 1.1: the tokens the site runs on. Imported once in app/globals.css. */
 :root {
   color-scheme: dark;
   /* Primitive palette: brand hues never change with theme */

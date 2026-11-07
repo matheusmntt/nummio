@@ -1,7 +1,7 @@
 /* Import tokens.css before this file. In app/globals.css:
 @import "tailwindcss";
-@import "../assets/system/tokens.css";
-@import "../assets/system/tailwind-v4.css";
+@import "../styles/tokens.css";
+@import "../styles/tailwind-v4.css";
 */
 @theme inline {
   --color-background: var(--nm-bg);
