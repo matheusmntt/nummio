@@ -27,7 +27,7 @@
         "./src/*"
       ],
       "@brand/*": [
-        "./assets/branding/*"
+        "./assets/*"
       ]
     }
   },

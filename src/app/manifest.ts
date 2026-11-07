@@ -9,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: site.description,
     start_url: "/",
     display: "browser",
-    background_color: tokens.themes.dark.background,
-    theme_color: tokens.themes.dark.background,
+    background_color: tokens.themes.signalCore.semantic.bgCanvas,
+    theme_color: tokens.themes.signalCore.semantic.bgCanvas,
     icons: [
       { src: "/brand/icon-192.png", sizes: "192x192", type: "image/png" },
       { src: "/brand/icon-512.png", sizes: "512x512", type: "image/png" },

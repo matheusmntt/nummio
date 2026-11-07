@@ -3,7 +3,9 @@
         "src",
         "scripts"
     ],
-    "ignore": [],
+    "ignore": [
+        "scripts/social/**"
+    ],
     "i18n": {
         "files": [],
         "keysAreSource": true
@@ -22,7 +24,6 @@
         "radius-scale": [],
         "glow-in-charts-only": [],
         "locale-number-format": [
-            "src/components/constructed-drawing.tsx",
             "src/components/chapters/arrival.tsx"
         ],
         "no-radial-halo": [
@@ -30,15 +31,15 @@
         ],
         "use-shared-components": [
             "src/components/mobile-nav.tsx",
-            "src/components/theme-toggle.tsx",
-            "src/components/chapters/research.tsx"
+            "src/components/theme-toggle.tsx"
         ],
         "no-hover-only-content": [
             "src/components/site-header.tsx"
         ],
         "use-shared-looks": [
             "src/components/chapters/arrival.tsx",
-            "src/components/chapters/method.tsx"
+            "src/components/chapters/method.tsx",
+            "src/components/chapters/practice.tsx"
         ]
     }
 }

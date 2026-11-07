@@ -1,9 +1,9 @@
 @import "tailwindcss";
-/* Brand kit is the single source of truth: tokens, Tailwind bridge, foundations. */
-@import "../../assets/branding/system/tokens.css";
-@import "../../assets/branding/system/tailwind-v4.css";
+/* The site's design system layer: tokens, Tailwind bridge, foundations (src/styles). */
+@import "../styles/tokens.css";
+@import "../styles/tailwind-v4.css";
 /* Layered so Tailwind utilities can still override element defaults (e.g. link color). */
-@import "../../assets/branding/system/base.css" layer(base);
+@import "../styles/base.css" layer(base);
 
 /* Theme is driven by [data-theme] on <html>; dark is the default. */
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
@@ -282,17 +282,42 @@
 }
 
 /*
- * Opening-sequence elements start hidden only when motion is accepted; the
- * intro timeline reveals them. The failsafe guarantees visibility even if
- * scripts never run.
+ * The hero's opening type runs in CSS rather than in the intro timeline, so
+ * it starts with the page's first paint instead of waiting for hydration:
+ * the headline rises out of its mask, then the meta and copy follow. Only
+ * when motion is accepted; otherwise everything is simply there.
  */
-@keyframes nm-failsafe {
-  to {
-    visibility: visible;
+@keyframes nm-headline-rise {
+  from {
+    transform: translateY(108%);
   }
 }
 
-.nm-motion [data-intro] {
-  visibility: hidden;
-  animation: nm-failsafe 0s 3.5s forwards;
+@keyframes nm-intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--nm-intro-y));
+  }
+}
+
+.nm-motion [data-headline-line] {
+  animation: nm-headline-rise 1.4s var(--ease-nm-out) 0.1s both;
+}
+
+.nm-motion [data-headline-line="2"] {
+  animation-delay: 0.24s;
+}
+
+.nm-motion [data-intro-meta] {
+  --nm-intro-y: 14px;
+  animation: nm-intro-rise 0.9s var(--ease-nm-out) 0.55s both;
+}
+
+.nm-motion [data-intro-copy] {
+  --nm-intro-y: 28px;
+  animation: nm-intro-rise 0.9s var(--ease-nm-out) 0.75s both;
+}
+
+.nm-motion [data-intro-copy] + [data-intro-copy] {
+  animation-delay: 0.83s;
 }

@@ -1,13 +1,16 @@
 "use client";
 
 import { useRef } from "react";
+import { contactHref, site } from "@/content/site";
 import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
+import { Magnetic } from "../motion/magnetic";
 
 const ticker = ["Explore", "Understand", "Build", "Curiosity, engineered"];
 
 /*
- * Chapter 07. A final statement built letter by letter as the reader
- * arrives, closed by the brand's square block, then handed to the footer.
+ * Chapter 06. A final statement built letter by letter as the reader
+ * arrives, closed by the brand's square block, and an invitation to write
+ * to the lab, then handed to the footer.
  */
 export function Closing() {
   const root = useRef<HTMLElement>(null);
@@ -18,7 +21,7 @@ export function Closing() {
       const mm = gsap.matchMedia();
 
       mm.add(media.motion, () => {
-        const split = SplitText.create(q("[data-closing-line]"), { type: "chars", mask: "chars" });
+        const split = SplitText.create(q("[data-closing-line]"), { type: "chars", mask: "chars", aria: "hidden" });
         const tl = gsap.timeline({
           defaults: { ease: ease.scrub },
           scrollTrigger: { trigger: root.current, start: "top 70%", end: "bottom bottom", scrub: 1 },
@@ -48,24 +51,24 @@ export function Closing() {
       id="closing"
       tabIndex={-1}
       aria-labelledby="closing-title"
-      data-chapter="07"
+      data-chapter="06"
       className="nm-track [--track:170svh]"
     >
       <div className="nm-stage flex flex-col">
         <div data-closing-meta className="nm-wide flex justify-between pt-24 font-mono text-meta tracking-label text-muted uppercase md:pt-28">
           <p>
-            <span className="text-accent">N/07</span> — Closing
+            <span className="text-accent">N/06</span> — Closing
           </p>
-          <p aria-hidden className="max-sm:hidden">Thought → Computation → Construction</p>
+          <p aria-hidden className="max-sm:hidden">Curiosity → Questions → Models → Tools</p>
         </div>
 
-        <h2 id="closing-title" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.055em]">
+        <h2 id="closing-title" aria-label="Start with a question" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.055em]">
           <span data-closing-line="1" className="block whitespace-nowrap">
-            Ideas into
-          </span>
+            Start with
+          </span>{" "}
           <span className="flex items-end justify-end gap-[0.06em] whitespace-nowrap">
             <span data-closing-line="2" className="block">
-              existence
+              a question
             </span>
             <span aria-hidden data-closing-block className="mb-[0.12em] inline-block size-[0.17em] shrink-0 rounded-xs bg-accent" />
           </span>
@@ -92,9 +95,19 @@ export function Closing() {
           <p className="max-w-sm text-muted">
             We explore questions, build models to understand them, and engineer tools from what we learn.
           </p>
-          <a href="#top" className="nm-link inline-flex min-h-11 items-center font-mono text-xs tracking-label text-foreground uppercase">
-            Back to the beginning ↑
-          </a>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Magnetic>
+              <a href={contactHref} className="nm-button nm-button--primary group">
+                Send us a question
+                <svg aria-hidden viewBox="0 0 16 16" className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 8h9M8.5 4 12.5 8l-4 4" />
+                </svg>
+              </a>
+            </Magnetic>
+            <a href={contactHref} className="nm-link inline-flex min-h-11 items-center font-mono text-xs tracking-label text-foreground">
+              {site.email}
+            </a>
+          </div>
         </div>
       </div>
     </section>

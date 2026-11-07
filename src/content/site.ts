@@ -3,10 +3,14 @@ export const site = {
   domain: "nummio.dev",
   url: "https://nummio.dev",
   tagline: "Curiosity, engineered.",
+  email: "matheusmdev@outlook.com",
   descriptor: "Independent technology lab",
   description:
-    "Nummio is an independent lab for technology, software and applied research. We explore questions, build models to understand them, and engineer tools from what we learn.",
+    "Nummio is an independent technology lab. We explore questions, build models to understand them, and engineer tools from what we learn.",
 } as const;
+
+/** Opens the visitor's mail app with a subject already filled in. */
+export const contactHref = `mailto:${site.email}?subject=${encodeURIComponent("A question for Nummio")}`;
 
 export type NavItem = {
   label: string;
@@ -14,9 +18,8 @@ export type NavItem = {
 };
 
 export const primaryNav: readonly NavItem[] = [
-  { label: "Projects", href: "#projects" },
   { label: "Approach", href: "#approach" },
-  { label: "Research", href: "#research" },
+  { label: "Practice", href: "#practice" },
   { label: "About", href: "#about" },
 ];
 
@@ -28,15 +31,14 @@ export type Chapter = {
 };
 
 /**
- * The homepage reads as one continuous narrative, Thought → Computation →
- * Construction. Chapters drive the progress rail and the header readout.
+ * The homepage reads as one continuous narrative, Curiosity → Questions →
+ * Models → Tools. Chapters drive the progress rail and the header readout.
  */
 export const chapters: readonly Chapter[] = [
   { id: "top", index: "01", label: "Arrival" },
   { id: "curiosity", index: "02", label: "Curiosity" },
   { id: "approach", index: "03", label: "Method" },
-  { id: "projects", index: "04", label: "Selected work" },
-  { id: "research", index: "05", label: "Research" },
-  { id: "about", index: "06", label: "Philosophy" },
-  { id: "closing", index: "07", label: "Closing" },
+  { id: "practice", index: "04", label: "Practice" },
+  { id: "about", index: "05", label: "Philosophy" },
+  { id: "closing", index: "06", label: "Closing" },
 ];

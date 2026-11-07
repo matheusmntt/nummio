@@ -1,0 +1,162 @@
+<!doctype html>
+<!--
+  Social cards for the brand kit. `?kind=og` renders the 1200×630 Open Graph
+  card, `?kind=banner` the 1500×500 GitHub banner. Rendered to PNG by
+  `pnpm social:render`; all copy here must follow the brand positioning.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Geist+Mono:wght@400;500&display=block"
+    />
+    <style>
+      :root {
+        --graphite: #0b0f14;
+        --charcoal: #151b22;
+        --bone: #f2f1ed;
+        --steel: #a5a9b8;
+        --signal: #b7ff63;
+        --line: rgb(242 241 237 / 10%);
+      }
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: var(--graphite);
+        color: var(--bone);
+        font-family: "Space Grotesk", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .grid {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 48px 48px;
+        opacity: 0.35;
+        mask-image: linear-gradient(to right, black, transparent 70%);
+      }
+      /* The kit's manifold wallpaper; oversized so its corner signature stays out of frame. */
+      .art {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent, black 45%);
+      }
+      .art img { height: 112%; width: auto; display: block; }
+      .frame { position: absolute; border: 1px solid var(--line); border-radius: 16px; }
+      .content { position: absolute; display: flex; flex-direction: column; align-items: flex-start; }
+      .mono {
+        font-family: "Geist Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-variant-numeric: tabular-nums;
+      }
+      .accent { color: var(--signal); }
+      .muted { color: var(--steel); }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgb(242 241 237 / 16%);
+        border-radius: 999px;
+        background: rgb(11 15 20 / 72%);
+        padding: 8px 16px;
+      }
+      .pill::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--signal); }
+      .chip {
+        display: inline-flex;
+        gap: 12px;
+        border: 1px solid rgb(242 241 237 / 12%);
+        border-radius: 8px;
+        background: rgb(21 27 34 / 80%);
+        padding: 10px 14px;
+      }
+
+      /* Open Graph, 1200×630 */
+      [data-kind="og"] .bar { position: absolute; inset: 0 0 auto; height: 4px; background: var(--signal); }
+      [data-kind="og"] .art { width: 60%; mask-image: linear-gradient(to right, transparent, black 60%); }
+      [data-kind="og"] .frame { inset: 28px; }
+      [data-kind="og"] .content { inset: 68px 68px 60px; }
+      [data-kind="og"] .top { align-self: stretch; display: flex; justify-content: space-between; align-items: center; }
+      [data-kind="og"] .lockup { height: 56px; }
+      [data-kind="og"] .pill { font-size: 14px; }
+      [data-kind="og"] h1 { margin-top: auto; font-size: 104px; line-height: 0.95; font-weight: 600; letter-spacing: -0.05em; }
+      [data-kind="og"] .lede { margin-top: 26px; font-size: 25px; font-weight: 500; letter-spacing: -0.01em; }
+      [data-kind="og"] .foot {
+        margin-top: 44px;
+        width: 520px;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid rgb(242 241 237 / 16%);
+        padding-top: 18px;
+        font-size: 15px;
+      }
+
+      /* GitHub banner, 1500×500 */
+      [data-kind="banner"] .bar { position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--signal); }
+      [data-kind="banner"] .art { width: 55%; }
+      [data-kind="banner"] .frame { inset: 28px 28px 28px 34px; }
+      [data-kind="banner"] .content { inset: 0 auto 0 88px; justify-content: center; }
+      [data-kind="banner"] .lockup { height: 96px; margin-left: -4px; }
+      [data-kind="banner"] .lede { margin-top: 40px; display: flex; gap: 22px; align-items: baseline; font-size: 30px; font-weight: 500; letter-spacing: -0.02em; }
+      [data-kind="banner"] .lede span { font-size: 24px; }
+      [data-kind="banner"] .chips { margin-top: 44px; display: flex; gap: 12px; font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="grid"></div>
+      <div class="art">
+        <img id="art" src="/assets/imagery/wallpapers/wallpaper-03-computational-manifold-2560x1440.jpg" alt="" />
+      </div>
+      <div class="bar"></div>
+      <div class="frame"></div>
+
+      <template id="og">
+        <div class="content">
+          <div class="top">
+            <img class="lockup" src="/assets/logo/nummio-lockup-dark.svg" alt="" />
+            <span class="pill mono">Independent technology lab</span>
+          </div>
+          <h1>Curiosity,<br /><span class="accent">engineered</span>.</h1>
+          <p class="lede muted">Software, products and applied research.<br />From question to tool.</p>
+          <div class="foot mono">
+            <span class="muted">Explore → Understand → Build</span>
+            <span class="accent">// nummio.dev</span>
+          </div>
+        </div>
+      </template>
+
+      <template id="banner">
+        <div class="content">
+          <img class="lockup" src="/assets/logo/nummio-lockup-dark.svg" alt="" />
+          <p class="lede">Curiosity, engineered. <span class="muted">Explore. Understand. Build.</span></p>
+          <div class="chips mono">
+            <span class="chip"><span class="muted">Type</span><span class="accent">Independent technology lab</span></span>
+            <span class="chip"><span class="muted">Method</span><span class="accent">Curiosity → Questions → Models → Tools</span></span>
+            <span class="chip"><span class="muted">Domain</span><span class="accent">nummio.dev</span></span>
+          </div>
+        </div>
+      </template>
+    </div>
+    <script>
+      const kind = new URLSearchParams(location.search).get("kind") === "banner" ? "banner" : "og";
+      const card = document.getElementById("card");
+      card.dataset.kind = kind;
+      card.append(document.getElementById(kind).content.cloneNode(true));
+      const images = [...document.images].map((img) => img.decode().catch(() => {}));
+      Promise.all([document.fonts.ready, ...images]).then(() => {
+        window.__done = true;
+      });
+    </script>
+  </body>
+</html>

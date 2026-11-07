@@ -1,21 +1,22 @@
-# Visual studies (v2)
+# Visual studies (lab masters)
 
-High-resolution masters for the three visual directions used on nummio.dev.
-They follow the brand kit studies in `assets/branding/imagery/` (which stay
-untouched as the identity reference) and are cut into web crops by
-`pnpm brand:sync`. Constructed Forms is not a raster study: it is drawn live
-as an SVG axonometric by `src/components/constructed-drawing.tsx`.
+Masters made for the lab, alongside the brand kit's imagery in `assets/imagery/`.
+They are cut into web crops by `pnpm brand:sync`.
 
 | File | Origin |
 | --- | --- |
-| `computational-forms.png` | Procedural, 3200×2000. Source: `scripts/studies/computational.html`, rendered with `pnpm studies:render`. |
-| `classical-intelligence.png` | AI-generated, 960×1280, Figma AI (`gpt-image-2.5-flare`), November 2026. Prompt below. |
+| `classical-sculpture.png` | AI-generated, 960×1280, Figma AI (`gpt-image-2.5-flare`), November 2026. Prompt below. |
 
-The classical study depicts an original sculpture created for this brand. It
-is not a photograph or reproduction of a real artwork; credit and caption it
-as a visual study, never as a documented object.
+On the site (chapter 02) the sculpture is shown as a photograph and, once
+scanned, re-printed live as a three-level Atkinson dither in iris and signal
+on graphite (`src/components/dither-study.tsx`). The dither is computed in the
+browser for the frame's real size, so there is no separate dithered master.
 
-Prompt used for `classical-intelligence.png`:
+The sculpture is an original created for this brand. It is not a photograph
+or reproduction of a real artwork; credit and caption it as a visual study,
+never as a documented object.
+
+Prompt used for `classical-sculpture.png`:
 
 > Fine-art studio photograph of an original classical marble sculpture (not a
 > copy of any existing artwork): the head, neck and draped shoulder of a young

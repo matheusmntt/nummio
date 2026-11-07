@@ -3,13 +3,12 @@ import { Closing } from "@/components/chapters/closing";
 import { Curiosity } from "@/components/chapters/curiosity";
 import { Method } from "@/components/chapters/method";
 import { Philosophy } from "@/components/chapters/philosophy";
-import { Research } from "@/components/chapters/research";
-import { SelectedWork } from "@/components/chapters/selected-work";
+import { Practice } from "@/components/chapters/practice";
 import { ScrollRefresh } from "@/components/motion/scroll-refresh";
 
 /*
- * One continuous narrative in seven chapters:
- * Thought (Curiosity) → Computation (Method, Research) → Construction (Work).
+ * One continuous narrative in six chapters: the question (Curiosity), the
+ * method (Explore → Understand → Build), what the lab does with it, and why.
  */
 export default function Home() {
   return (
@@ -17,8 +16,7 @@ export default function Home() {
       <Arrival />
       <Curiosity />
       <Method />
-      <SelectedWork />
-      <Research />
+      <Practice />
       <Philosophy />
       <Closing />
       <ScrollRefresh />

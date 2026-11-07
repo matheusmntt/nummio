@@ -3,22 +3,22 @@
 import { useRef } from "react";
 import { site } from "@/content/site";
 import { duration, ease, gsap, media, useGSAP } from "@/lib/motion";
+import { Reveal } from "../motion/reveal";
 import { RevealText } from "../motion/reveal-text";
 import { ScrollWords } from "../motion/scroll-words";
 
 const facts = [
   { term: "Type", detail: site.descriptor },
-  { term: "Focus", detail: "Software, applied research" },
+  { term: "Fronts", detail: "Products · Partners · Research" },
   { term: "Method", detail: "Explore → Understand → Build" },
-  { term: "Structure", detail: "Nummio · Nummio Labs · Nummio Research" },
   { term: "Domain", detail: site.domain },
 ] as const;
 
-/** Geometry of the official symbol (assets/branding/icons/nummio-symbol-*.svg). */
-const SYMBOL_N = "M22 78 V22 H34 L68 61 V22 H80 V78 H68 L34 39 V78 Z";
+/** Geometry of the official symbol (assets/icons/nummio-symbol-*.svg). */
+const SYMBOL_N = "M20 80 V20 H33.5 L66.5 58.5 V35 H80 V80 H66.5 L33.5 41.5 V80 Z";
 
 /*
- * Chapter 06. The page turns to the opposite surface: a light reading room
+ * Chapter 05. The page turns to the opposite surface: a light reading room
  * in the dark theme (and the reverse in light). The Nummio symbol is drawn,
  * filled and finally receives its block, the lab's mark assembled in place.
  */
@@ -63,12 +63,12 @@ export function Philosophy() {
   );
 
   return (
-    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="06" className="relative isolate text-inverse-foreground">
+    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="05" className="relative isolate text-inverse-foreground">
       <div aria-hidden data-surface className="absolute inset-0 -z-10 bg-inverse" />
       <div className="nm-wide py-24 md:py-36">
         <div className="flex items-center justify-between font-mono text-meta tracking-label text-inverse-muted uppercase">
           <p>
-            <span className="text-inverse-accent">N/06</span> — Philosophy
+            <span className="text-inverse-accent">N/05</span> — Philosophy
           </p>
           <p aria-hidden>Explore → Understand → Build</p>
         </div>
@@ -78,20 +78,25 @@ export function Philosophy() {
             <RevealText as="h2" id="about-title" className="text-[clamp(3rem,8.4vw,9.5rem)] leading-[0.9] font-semibold tracking-[-0.05em] text-balance">
               An independent lab, by design.
             </RevealText>
+            <Reveal className="mt-10 md:mt-14" delay={0.2}>
+              <p className="text-xl font-medium tracking-snug md:text-2xl">One method for everything we make.</p>
+              <p className="mt-3 font-mono text-xs tracking-label text-inverse-muted uppercase md:text-sm">
+                Curiosity → Questions → Models → Tools
+              </p>
+            </Reveal>
           </div>
           <div data-symbol className="relative hidden aspect-square w-full max-w-72 self-end justify-self-end lg:col-span-4 lg:block">
             <svg viewBox="0 0 100 100" aria-hidden className="size-full overflow-visible">
               <path data-symbol-fill d={SYMBOL_N} fill="currentColor" />
               <path data-symbol-stroke d={SYMBOL_N} fill="none" stroke="currentColor" strokeWidth="0.6" />
-              <rect data-symbol-block x="75" y="13" width="13" height="13" rx="1.8" fill="var(--nm-inverse-accent)" />
+              <rect data-symbol-block x="66.5" y="15" width="15.5" height="15.5" rx="3.2" fill="var(--nm-inverse-accent)" />
             </svg>
           </div>
         </div>
 
         <div className="mt-16 grid gap-y-14 md:mt-24 lg:grid-cols-12 lg:gap-x-6">
           <ScrollWords className="text-3xl leading-[1.12] font-medium tracking-snug text-balance md:text-5xl lg:col-span-9" dim={0.18}>
-            Nummio is an independent laboratory for technology, software and applied research. It exists to give
-            curiosity a working method.
+            Nummio is an independent technology lab. It exists to give curiosity a working method.
           </ScrollWords>
 
           <div className="space-y-6 text-lg text-inverse-muted lg:col-span-5 lg:col-start-1">

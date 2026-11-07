@@ -1,5 +1,5 @@
 import { cacheLife } from "next/cache";
-import { primaryNav, site } from "@/content/site";
+import { contactHref, primaryNav, site } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { EditorialLabel } from "./editorial-label";
 import { Rise } from "./motion/rise";
@@ -20,7 +20,7 @@ export function SiteFooter() {
               <em className="not-italic">{site.tagline}</em>
             </p>
             <p className="mt-4 max-w-sm text-muted">
-              {site.descriptor} for software and applied research.
+              {site.descriptor}. Software, products and applied research.
             </p>
           </div>
 
@@ -41,8 +41,16 @@ export function SiteFooter() {
           </nav>
 
           <div className="md:col-span-3">
-            <EditorialLabel as="p">Lab</EditorialLabel>
+            <EditorialLabel as="p">Contact</EditorialLabel>
             <ul className="mt-4 text-muted">
+              <li>
+                <a
+                  href={contactHref}
+                  className="inline-flex min-h-11 items-center text-foreground no-underline transition-colors hover:text-accent"
+                >
+                  {site.email}
+                </a>
+              </li>
               <li>
                 <a
                   href={site.url}
@@ -51,8 +59,6 @@ export function SiteFooter() {
                   {site.domain}
                 </a>
               </li>
-              <li className="flex min-h-11 items-center">Nummio Labs</li>
-              <li className="flex min-h-11 items-center">Nummio Research</li>
             </ul>
           </div>
         </div>

@@ -1,0 +1,21 @@
+/* Import tokens.css before this file. In app/globals.css:
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/tailwind-v4.css";
+*/
+@theme inline {
+  --color-background: var(--nm-bg);
+  --color-foreground: var(--nm-fg);
+  --color-surface: var(--nm-surface);
+  --color-surface-raised: var(--nm-surface-raised);
+  --color-muted: var(--nm-fg-muted);
+  --color-subtle: var(--nm-fg-subtle);
+  --color-line: var(--nm-border);
+  --color-accent: var(--nm-accent);
+  --color-accent-foreground: var(--nm-accent-fg);
+  --color-research: var(--nm-research);
+  --color-focus: var(--nm-focus);
+  --font-sans: var(--nm-font-sans);
+  --font-mono: var(--nm-font-mono);
+  --radius-card: var(--nm-radius-lg);
+}

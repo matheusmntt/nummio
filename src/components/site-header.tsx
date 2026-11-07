@@ -167,8 +167,11 @@ export function SiteHeader() {
                 aria-current={active === item.id ? "true" : undefined}
                 className="group flex h-6 items-center justify-end gap-3 no-underline"
               >
-                {/* Labels reveal on hover and focus; the active one, and all on touch screens, stay visible. */}
-                <span className="pointer-events-none translate-x-2 font-mono text-meta tracking-label whitespace-nowrap text-muted uppercase opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-aria-[current=true]:translate-x-0 group-aria-[current=true]:text-foreground group-aria-[current=true]:opacity-100 pointer-coarse:translate-x-0 pointer-coarse:opacity-100">
+                {/*
+                  Labels reveal on hover and focus only: the rail sits over the page's gutter, so a
+                  standing label would cover content. The header readout names the current chapter.
+                */}
+                <span className="pointer-events-none translate-x-2 font-mono text-meta tracking-label whitespace-nowrap text-muted uppercase opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-aria-[current=true]:text-foreground">
                   {item.index} {item.label}
                 </span>
                 <span

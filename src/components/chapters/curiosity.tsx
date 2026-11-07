@@ -1,19 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
-import { art, artQuality, crops } from "@/lib/art";
+import { art, crops } from "@/lib/art";
 import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
+import { DitherStudy } from "../dither-study";
 import { FigureCaption } from "../figure-caption";
 
-const SLIT = "inset(49% 47% 49% 47% round 0px 0px 0px 0px)";
-const OPEN = "inset(0% 0% 0% 0% round 0px 0px 0px 0px)";
-const ARCH = "inset(4% 7% 0% 7% round 999px 999px 0px 0px)";
+/** Crop of the sculpture in the print, as fractions (like CSS `object-position`). */
+const FOCUS = { x: 0.62, y: 0.3 };
+
+/** Dither cell sizes in CSS pixels: the print resolves through these, coarse to fine. */
+const CELLS = [32, 20, 12, 8, 5, 3, 2] as const;
+
+const cellLabel = (cell: number) => String(cell).padStart(2, "0");
 
 /*
- * Chapter 02. Out of the dark field, a slit of light opens onto the
- * Classical Intelligence study. Words surface as the window widens, then
- * the frame settles into an arch: thought as the foundation of the lab.
+ * Chapter 02. The Classical Intelligence study is shown only as a print: a
+ * hard dither in the brand's two inks. As the reader scrolls, the sampling
+ * grid resolves in steps, from a few coarse blocks to the full fine print,
+ * the way a computation sharpens its reading of a thought.
  */
 export function Curiosity() {
   const root = useRef<HTMLElement>(null);
@@ -25,25 +30,50 @@ export function Curiosity() {
 
       mm.add(media.motion, () => {
         const statement = SplitText.create(q("[data-statement]"), { type: "words", mask: "words" });
-        const reading = SplitText.create(q("[data-reading]"), { type: "words" });
+        // Word splits stay readable as plain text; an aria-label is not allowed on a <p>.
+        const reading = SplitText.create(q("[data-reading]"), { type: "words", aria: "none" });
+        const levels = q("[data-dither-level]") as HTMLCanvasElement[];
+        const readout = q("[data-cell-readout]")[0] as HTMLElement;
+        const resolve = { step: 0 };
+
+        // Layers stack coarse to fine, so showing every layer up to the current step shows that step.
+        const show = (step: number) => {
+          levels.forEach((level, index) => {
+            level.style.visibility = index <= step ? "visible" : "hidden";
+          });
+          readout.textContent = cellLabel(CELLS[step]);
+        };
+        show(0);
 
         const tl = gsap.timeline({
           defaults: { ease: ease.scrub },
           scrollTrigger: { trigger: root.current, start: "top top", end: "bottom bottom", scrub: 1 },
         });
 
-        tl.fromTo(q("[data-frame]"), { clipPath: SLIT }, { clipPath: OPEN, duration: 1, ease: "power2.inOut" }, 0)
-          // Kept close to 1: the study is a 1600px source, so heavy zoom would soften it.
-          .fromTo(q("[data-frame-image]"), { scale: 1.16, yPercent: -3 }, { scale: 1, yPercent: 0, duration: 3 }, 0)
+        tl.fromTo(q("[data-frame]"), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 0)
+          // The resolve: one discrete step per cell size, no blending between them.
+          .to(
+            resolve,
+            {
+              step: CELLS.length - 1,
+              duration: 1.4,
+              ease: "none",
+              onUpdate: () => show(Math.round(resolve.step)),
+            },
+            0.15,
+          )
+          // The ruler fills as the grid resolves.
+          .fromTo(q("[data-resolve-bar]"), { scaleY: 0 }, { scaleY: 1, duration: 1.4, ease: "none" }, 0.15)
           .fromTo(q("[data-ghost]"), { xPercent: 12 }, { xPercent: -28, duration: 3 }, 0)
           .from(q("[data-kicker] > *"), { yPercent: 120, opacity: 0, duration: 0.4, stagger: 0.08, ease: ease.out }, 0.1)
           .from(statement.words, { yPercent: 110, duration: 0.5, stagger: 0.05, ease: ease.out }, 0.35)
           .fromTo(reading.words, { opacity: 0.14 }, { opacity: 1, duration: 0.9, stagger: 0.04 }, 1.0)
-          .to(q("[data-frame]"), { clipPath: ARCH, duration: 0.8, ease: "power2.inOut" }, 2.0)
           .from(q("[data-coda] > *"), { y: 30, opacity: 0, duration: 0.5, stagger: 0.1, ease: ease.out }, 2.1)
           .to({}, { duration: 0.4 });
 
         return () => {
+          levels.forEach((level) => level.style.removeProperty("visibility"));
+          readout.textContent = cellLabel(CELLS[CELLS.length - 1]);
           statement.revert();
           reading.revert();
         };
@@ -61,7 +91,8 @@ export function Curiosity() {
       data-chapter="02"
       className="nm-track [--track:300svh] md:[--track:340svh]"
     >
-      <div className="nm-stage">
+      {/* Below md the stage is a column: the figure is centred in the space the text leaves above it. */}
+      <div className="nm-stage max-md:flex max-md:flex-col max-md:pt-18">
         {/* Depth layer: an outlined word drifting slower than the frame. */}
         <p
           aria-hidden
@@ -71,22 +102,24 @@ export function Curiosity() {
           Thought
         </p>
 
-        <figure className="absolute inset-x-(--nm-gutter) top-18 h-[38svh] md:top-24 md:right-(--nm-gutter) md:bottom-10 md:left-auto md:h-auto md:w-[44vw] lg:w-[min(40vw,40rem)]">
-          <div data-frame className="relative size-full overflow-hidden bg-plate">
-            <div data-frame-image className="absolute inset-0 will-change-transform">
-              <Image
-                src={crops.classicalTall}
-                alt={art.classical.alt}
-                fill
-                placeholder="blur"
-                quality={artQuality}
-                sizes="(min-width: 1024px) min(40vw, 40rem), (min-width: 768px) 44vw, 100vw"
-                className="object-cover object-[62%_30%]"
-              />
+        <figure data-figure className="relative mx-(--nm-gutter) my-auto h-[42svh] min-h-0 md:absolute md:top-24 md:right-(--nm-gutter) md:bottom-10 md:mx-0 md:my-0 md:h-auto md:w-[44vw] lg:w-[min(40vw,40rem)]">
+          <div aria-hidden className="nm-corners -inset-2 text-line-strong md:-inset-3" />
+          <div data-frame role="img" aria-label={art.classical.alt} className="relative size-full overflow-hidden bg-plate">
+            <DitherStudy src={crops.classicalSculpture} focusX={FOCUS.x} focusY={FOCUS.y} cells={CELLS} />
+            <div aria-hidden className="absolute inset-0 grid grid-cols-3 divide-x divide-plate-line/50">
+              <span />
+              <span />
+              <span />
             </div>
-            {/* The study's ground is graphite: let the drapery fall away into it. */}
-            <div aria-hidden className="absolute inset-x-0 -bottom-1 h-1/4 bg-linear-to-t from-plate to-transparent" />
-            <div aria-hidden className="absolute inset-y-0 -right-1 w-1/5 bg-linear-to-l from-plate to-transparent" />
+            <div aria-hidden className="absolute inset-y-0 left-0 w-2 bg-[repeating-linear-gradient(to_bottom,var(--nm-plate-line)_0_1px,transparent_1px_16px)]">
+              <div data-resolve-bar className="ml-auto h-full w-px origin-top bg-plate-accent" />
+            </div>
+            <p aria-hidden className="absolute top-0 right-0 bg-plate px-2 py-1 font-mono text-meta tracking-label text-plate-accent uppercase tabular-nums">
+              Cell <span data-cell-readout>{cellLabel(CELLS[CELLS.length - 1])}</span> px
+            </p>
+            <p aria-hidden className="absolute bottom-0 left-0 bg-plate-accent px-2 py-1 font-mono text-meta tracking-label text-plate uppercase">
+              Atkinson · Iris × Signal
+            </p>
           </div>
           <FigureCaption className="max-md:hidden">
             <span>
@@ -96,7 +129,7 @@ export function Curiosity() {
           </FigureCaption>
         </figure>
 
-        <div className="nm-wide relative flex h-full flex-col justify-end pt-[calc(38svh+5rem)] pb-8 md:w-[calc(100%-2*var(--nm-gutter))] md:justify-center md:pt-24 md:pb-16">
+        <div className="nm-wide relative flex flex-col justify-end pt-6 pb-8 md:h-full md:w-[calc(100%-2*var(--nm-gutter))] md:justify-center md:pt-24 md:pb-16">
           <div className="md:max-w-[calc(56vw-2*var(--nm-gutter)-1.5rem)] lg:max-w-[min(52vw,46rem)]">
             <p data-kicker className="flex gap-3 overflow-hidden font-mono text-meta tracking-label text-muted uppercase">
               <span className="text-accent">N/02</span>
@@ -117,7 +150,7 @@ export function Curiosity() {
               <p>
                 <span className="text-muted">Out</span> Questions
               </p>
-              <p className="ml-auto">Thought → Computation → Construction</p>
+              <p className="ml-auto">Curiosity → Questions → Models → Tools</p>
             </div>
           </div>
         </div>
