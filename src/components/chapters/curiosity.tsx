@@ -4,17 +4,17 @@ import Image from "next/image";
 import { useRef } from "react";
 import { art, artQuality, crops } from "@/lib/art";
 import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
+import { DitherStudy } from "../dither-study";
 import { FigureCaption } from "../figure-caption";
 
-const sizes = "(min-width: 1024px) min(40vw, 40rem), (min-width: 768px) 44vw, 100vw";
-const focus = "object-cover object-[85%_30%] md:max-lg:object-[72%_30%]";
+/** Crop of the sculpture, shared by the photograph and its dithered print so they register exactly. */
+const FOCUS = { x: 0.62, y: 0.3 };
 
 /*
- * Chapter 02. The Classical Intelligence study surfaces from the dark in
- * plain marble. Then a scan line passes over it and lights the mesh traced
- * on the face: thought, read by computation.
+ * Chapter 02. The Classical Intelligence study surfaces from the dark as a
+ * marble photograph. Then a scan line passes over it and re-prints it as a
+ * hard dither in the brand's two inks: thought, read by computation.
  */
-
 export function Curiosity() {
   const root = useRef<HTMLElement>(null);
 
@@ -93,35 +93,36 @@ export function Curiosity() {
           <div aria-hidden className="nm-corners -inset-2 text-line-strong md:-inset-3" />
           <div data-frame className="relative size-full overflow-hidden bg-plate">
             <div data-frame-image className="absolute inset-0 will-change-transform">
-              {/* Plain marble underneath; the full-colour study is the scanned layer. */}
               <Image
-                src={crops.classicalTall}
-                alt=""
+                src={crops.classicalSculpture}
+                alt={art.classical.alt}
                 fill
                 placeholder="blur"
                 quality={artQuality}
-                sizes={sizes}
-                className={`${focus} opacity-80 grayscale`}
+                sizes="(min-width: 1024px) min(40vw, 40rem), (min-width: 768px) 44vw, 100vw"
+                className="object-cover opacity-80"
+                style={{ objectPosition: `${FOCUS.x * 100}% ${FOCUS.y * 100}%` }}
               />
-              <div data-signal className="absolute inset-0">
-                <Image
-                  src={crops.classicalTall}
-                  alt={art.classical.alt}
-                  fill
-                  quality={artQuality}
-                  sizes={sizes}
-                  className={focus}
-                />
+              {/* The dithered print: the scanned layer, framed like a raw proof sheet. */}
+              <div data-signal className="absolute inset-0 overflow-hidden bg-plate">
+                <DitherStudy src={crops.classicalSculpture} focusX={FOCUS.x} focusY={FOCUS.y} className="absolute top-0 left-0" />
+                <div aria-hidden className="absolute inset-0 grid grid-cols-3 divide-x divide-plate-line/50">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div aria-hidden className="absolute inset-y-0 left-0 w-2 bg-[repeating-linear-gradient(to_bottom,var(--nm-plate-line)_0_1px,transparent_1px_16px)]" />
+                <p aria-hidden className="absolute bottom-0 left-0 bg-plate-accent px-2 py-1 font-mono text-meta tracking-label text-plate uppercase">
+                  Atkinson · Iris × Signal
+                </p>
               </div>
               <div aria-hidden data-scan className="pointer-events-none absolute inset-0 opacity-0">
                 <div className="absolute inset-x-0 top-0 h-px bg-plate-accent" />
                 <p className="absolute top-0 right-3 -translate-y-[calc(100%+0.375rem)] bg-plate-scrim px-1.5 py-0.5 font-mono text-meta tracking-label text-plate-accent uppercase tabular-nums">
-                  Scan <span data-scan-readout>000</span>
+                  Dither <span data-scan-readout>000</span>
                 </p>
               </div>
             </div>
-            {/* The study's ground is graphite: let the shoulders fall away into it. */}
-            <div aria-hidden className="absolute inset-x-0 -bottom-1 h-1/4 bg-linear-to-t from-plate to-transparent" />
           </div>
           <FigureCaption className="max-md:hidden">
             <span>
