@@ -91,7 +91,8 @@ export function Curiosity() {
       data-chapter="02"
       className="nm-track [--track:300svh] md:[--track:340svh]"
     >
-      <div className="nm-stage">
+      {/* Below md the stage is a column: the figure is centred in the space the text leaves above it. */}
+      <div className="nm-stage max-md:flex max-md:flex-col max-md:pt-18">
         {/* Depth layer: an outlined word drifting slower than the frame. */}
         <p
           aria-hidden
@@ -101,7 +102,7 @@ export function Curiosity() {
           Thought
         </p>
 
-        <figure data-figure className="absolute inset-x-(--nm-gutter) top-18 h-[42svh] md:top-24 md:right-(--nm-gutter) md:bottom-10 md:left-auto md:h-auto md:w-[44vw] lg:w-[min(40vw,40rem)]">
+        <figure data-figure className="relative mx-(--nm-gutter) my-auto h-[42svh] min-h-0 md:absolute md:top-24 md:right-(--nm-gutter) md:bottom-10 md:mx-0 md:my-0 md:h-auto md:w-[44vw] lg:w-[min(40vw,40rem)]">
           <div aria-hidden className="nm-corners -inset-2 text-line-strong md:-inset-3" />
           <div data-frame role="img" aria-label={art.classical.alt} className="relative size-full overflow-hidden bg-plate">
             <DitherStudy src={crops.classicalSculpture} focusX={FOCUS.x} focusY={FOCUS.y} cells={CELLS} />
@@ -128,7 +129,7 @@ export function Curiosity() {
           </FigureCaption>
         </figure>
 
-        <div className="nm-wide relative flex h-full flex-col justify-start pt-[calc(42svh+7rem)] pb-8 md:w-[calc(100%-2*var(--nm-gutter))] md:justify-center md:pt-24 md:pb-16">
+        <div className="nm-wide relative flex flex-col justify-end pt-6 pb-8 md:h-full md:w-[calc(100%-2*var(--nm-gutter))] md:justify-center md:pt-24 md:pb-16">
           <div className="md:max-w-[calc(56vw-2*var(--nm-gutter)-1.5rem)] lg:max-w-[min(52vw,46rem)]">
             <p data-kicker className="flex gap-3 overflow-hidden font-mono text-meta tracking-label text-muted uppercase">
               <span className="text-accent">N/02</span>
