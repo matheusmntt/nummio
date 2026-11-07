@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    // 90 is reserved for the art plates (see artQuality in src/lib/art.ts).
+    qualities: [75, 90],
   },
   turbopack: {
     rules: {
