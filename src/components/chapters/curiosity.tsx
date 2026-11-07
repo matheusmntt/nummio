@@ -55,14 +55,14 @@ export function Curiosity() {
             resolve,
             {
               step: CELLS.length - 1,
-              duration: 2.2,
+              duration: 1.4,
               ease: "none",
               onUpdate: () => show(Math.round(resolve.step)),
             },
             0.15,
           )
           // The ruler fills as the grid resolves.
-          .fromTo(q("[data-resolve-bar]"), { scaleY: 0 }, { scaleY: 1, duration: 2.2, ease: "none" }, 0.15)
+          .fromTo(q("[data-resolve-bar]"), { scaleY: 0 }, { scaleY: 1, duration: 1.4, ease: "none" }, 0.15)
           .fromTo(q("[data-ghost]"), { xPercent: 12 }, { xPercent: -28, duration: 3 }, 0)
           .from(q("[data-kicker] > *"), { yPercent: 120, opacity: 0, duration: 0.4, stagger: 0.08, ease: ease.out }, 0.1)
           .from(statement.words, { yPercent: 110, duration: 0.5, stagger: 0.05, ease: ease.out }, 0.35)
