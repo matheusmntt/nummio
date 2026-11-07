@@ -49,9 +49,10 @@ export function Practice() {
           </p>
         </header>
 
-        <ol className="mt-16 grid gap-y-14 md:mt-24 lg:grid-cols-3 lg:gap-x-6">
+        {/* On large screens each front is a subgrid, so its rows line up across the three columns. */}
+        <ol className="mt-16 grid gap-y-14 md:mt-24 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-0">
           {fronts.map((front, index) => (
-            <li key={front.title} data-front className="group relative pt-6">
+            <li key={front.title} data-front className="group relative pt-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid">
               <span aria-hidden data-front-rule className="absolute inset-x-0 top-0 h-px origin-left bg-line" />
               <div data-front-item className="flex items-center justify-between font-mono text-meta tracking-label uppercase">
                 <span className="text-accent">F/{String(index + 1).padStart(2, "0")}</span>
