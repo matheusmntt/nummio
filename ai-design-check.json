@@ -3,7 +3,9 @@
         "src",
         "scripts"
     ],
-    "ignore": [],
+    "ignore": [
+        "scripts/social/**"
+    ],
     "i18n": {
         "files": [],
         "keysAreSource": true
@@ -36,7 +38,8 @@
         ],
         "use-shared-looks": [
             "src/components/chapters/arrival.tsx",
-            "src/components/chapters/method.tsx"
+            "src/components/chapters/method.tsx",
+            "src/components/chapters/practice.tsx"
         ]
     }
 }
