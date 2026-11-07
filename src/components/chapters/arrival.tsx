@@ -134,15 +134,15 @@ export function Arrival() {
                 </p>
                 <div data-intro data-intro-copy className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <Magnetic>
-                    <a href="#projects" className="nm-button nm-button--primary group">
-                      Explore projects
+                    <a href="#approach" className="nm-button nm-button--primary group">
+                      Our approach
                       <svg aria-hidden viewBox="0 0 16 16" className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M3 8h9M8.5 4 12.5 8l-4 4" />
                       </svg>
                     </a>
                   </Magnetic>
-                  <a href="#approach" className="nm-link inline-flex min-h-11 items-center font-medium text-foreground">
-                    Our approach
+                  <a href="#about" className="nm-link inline-flex min-h-11 items-center font-medium text-foreground">
+                    About the lab
                   </a>
                 </div>
               </div>

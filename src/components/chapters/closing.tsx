@@ -6,7 +6,7 @@ import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
 const ticker = ["Explore", "Understand", "Build", "Curiosity, engineered"];
 
 /*
- * Chapter 07. A final statement built letter by letter as the reader
+ * Chapter 05. A final statement built letter by letter as the reader
  * arrives, closed by the brand's square block, then handed to the footer.
  */
 export function Closing() {
@@ -48,13 +48,13 @@ export function Closing() {
       id="closing"
       tabIndex={-1}
       aria-labelledby="closing-title"
-      data-chapter="07"
+      data-chapter="05"
       className="nm-track [--track:170svh]"
     >
       <div className="nm-stage flex flex-col">
         <div data-closing-meta className="nm-wide flex justify-between pt-24 font-mono text-meta tracking-label text-muted uppercase md:pt-28">
           <p>
-            <span className="text-accent">N/07</span> — Closing
+            <span className="text-accent">N/05</span> — Closing
           </p>
           <p aria-hidden className="max-sm:hidden">Thought → Computation → Construction</p>
         </div>

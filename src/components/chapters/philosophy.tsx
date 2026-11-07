@@ -18,7 +18,7 @@ const facts = [
 const SYMBOL_N = "M20 80 V20 H33.5 L66.5 58.5 V35 H80 V80 H66.5 L33.5 41.5 V80 Z";
 
 /*
- * Chapter 06. The page turns to the opposite surface: a light reading room
+ * Chapter 04. The page turns to the opposite surface: a light reading room
  * in the dark theme (and the reverse in light). The Nummio symbol is drawn,
  * filled and finally receives its block, the lab's mark assembled in place.
  */
@@ -63,12 +63,12 @@ export function Philosophy() {
   );
 
   return (
-    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="06" className="relative isolate text-inverse-foreground">
+    <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="04" className="relative isolate text-inverse-foreground">
       <div aria-hidden data-surface className="absolute inset-0 -z-10 bg-inverse" />
       <div className="nm-wide py-24 md:py-36">
         <div className="flex items-center justify-between font-mono text-meta tracking-label text-inverse-muted uppercase">
           <p>
-            <span className="text-inverse-accent">N/06</span> — Philosophy
+            <span className="text-inverse-accent">N/04</span> — Philosophy
           </p>
           <p aria-hidden>Explore → Understand → Build</p>
         </div>

@@ -40,7 +40,6 @@ for (const [from, to] of copies) {
  */
 const GRAPHITE = { r: 11, g: 15, b: 20 };
 const imagery = join(kit, "imagery");
-const manifold = "wallpapers/wallpaper-03-computational-manifold-2560x1440.jpg";
 
 const crops = [
   {
@@ -50,18 +49,10 @@ const crops = [
     grade: true,
     upscale: true,
   },
-  { from: manifold, to: "computational-wide.jpg", region: { left: 0, top: 0, width: 2560, height: 1340 }, grade: true },
-  { from: manifold, to: "computational-portrait.jpg", region: { left: 640, top: 0, width: 1280, height: 1340 }, grade: true },
   {
-    from: "raw/constructed-forms-raw.jpg",
-    to: "constructed-plate.jpg",
-    region: { left: 413, top: 0, width: 894, height: 768 },
-    upscale: true,
-  },
-  {
-    from: "wallpapers/wallpaper-01-kinetic-ui-2560x1440.jpg",
-    to: "interface-plate.jpg",
-    region: { left: 512, top: 0, width: 1536, height: 1340 },
+    from: "wallpapers/wallpaper-03-computational-manifold-2560x1440.jpg",
+    to: "computational-wide.jpg",
+    region: { left: 0, top: 0, width: 2560, height: 1340 },
     grade: true,
   },
 ];

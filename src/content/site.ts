@@ -14,9 +14,7 @@ export type NavItem = {
 };
 
 export const primaryNav: readonly NavItem[] = [
-  { label: "Projects", href: "#projects" },
   { label: "Approach", href: "#approach" },
-  { label: "Research", href: "#research" },
   { label: "About", href: "#about" },
 ];
 
@@ -35,8 +33,6 @@ export const chapters: readonly Chapter[] = [
   { id: "top", index: "01", label: "Arrival" },
   { id: "curiosity", index: "02", label: "Curiosity" },
   { id: "approach", index: "03", label: "Method" },
-  { id: "projects", index: "04", label: "Selected work" },
-  { id: "research", index: "05", label: "Research" },
-  { id: "about", index: "06", label: "Philosophy" },
-  { id: "closing", index: "07", label: "Closing" },
+  { id: "about", index: "04", label: "Philosophy" },
+  { id: "closing", index: "05", label: "Closing" },
 ];

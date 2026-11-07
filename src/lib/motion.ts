@@ -4,7 +4,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
@@ -37,7 +36,7 @@ let registered = false;
 /** Registers plugins and brand eases once per page. Safe to call repeatedly. */
 export function registerMotion() {
   if (registered || typeof window === "undefined") return;
-  gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, CustomEase, ScrambleTextPlugin, DrawSVGPlugin);
+  gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, CustomEase, DrawSVGPlugin);
   // "Engineered" ease: a fast, precise departure with a long, quiet settle.
   CustomEase.create("nm.out", "M0,0 C0.16,1 0.3,1 1,1");
   CustomEase.create("nm.inOut", "M0,0 C0.7,0 0.2,1 1,1");
