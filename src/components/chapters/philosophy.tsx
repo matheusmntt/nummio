@@ -14,7 +14,7 @@ const facts = [
   { term: "Domain", detail: site.domain },
 ] as const;
 
-/** Geometry of the official symbol (assets/v2/icons/nummio-symbol-*.svg). */
+/** Geometry of the official symbol (assets/icons/nummio-symbol-*.svg). */
 const SYMBOL_N = "M20 80 V20 H33.5 L66.5 58.5 V35 H80 V80 H66.5 L33.5 41.5 V80 Z";
 
 /*
@@ -96,8 +96,7 @@ export function Philosophy() {
 
         <div className="mt-16 grid gap-y-14 md:mt-24 lg:grid-cols-12 lg:gap-x-6">
           <ScrollWords className="text-3xl leading-[1.12] font-medium tracking-snug text-balance md:text-5xl lg:col-span-9" dim={0.18}>
-            Nummio is an independent laboratory for technology, software and applied research. It exists to give
-            curiosity a working method.
+            Nummio is an independent technology lab. It exists to give curiosity a working method.
           </ScrollWords>
 
           <div className="space-y-6 text-lg text-inverse-muted lg:col-span-5 lg:col-start-1">

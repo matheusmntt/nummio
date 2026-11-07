@@ -109,8 +109,8 @@ export function Practice() {
             One lab, three fronts.
           </RevealText>
           <p className="max-w-md text-lg text-muted lg:col-span-4 lg:self-end">
-            Nummio is a hub for technology and innovation. The same method runs through everything it makes, whoever
-            it is for.
+            Nummio is an independent technology lab. The same method runs through everything it makes, whoever it is
+            for.
           </p>
         </header>
 

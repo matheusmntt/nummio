@@ -20,7 +20,7 @@ export function SiteFooter() {
               <em className="not-italic">{site.tagline}</em>
             </p>
             <p className="mt-4 max-w-sm text-muted">
-              {site.descriptor} for software and applied research.
+              {site.descriptor}. Software, products and applied research.
             </p>
           </div>
 

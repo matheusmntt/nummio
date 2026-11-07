@@ -122,8 +122,8 @@ export function Arrival() {
             <div className="grid gap-8 md:grid-cols-12 md:items-end">
               <div data-fade-early className="relative before:pointer-events-none before:absolute before:-inset-x-16 before:-inset-y-12 before:-z-10 before:bg-[radial-gradient(closest-side,var(--nm-bg)_45%,transparent)] md:col-span-5 md:col-start-8 lg:col-span-4 lg:col-start-9">
                 <p data-intro-copy className="max-w-sm text-base text-muted md:text-lg">
-                  Nummio is an independent lab for software and applied research. We follow questions until they become
-                  models, and models until they become tools.
+                  Nummio is an independent technology lab. We follow questions until they become models, and models
+                  until they become tools.
                 </p>
                 <div data-intro-copy className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <Magnetic>
