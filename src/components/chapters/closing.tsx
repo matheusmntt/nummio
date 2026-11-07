@@ -52,14 +52,14 @@ export function Closing() {
       className="nm-track [--track:170svh]"
     >
       <div className="nm-stage flex flex-col">
-        <div data-closing-meta className="nm-wide flex justify-between pt-24 font-mono text-[0.6875rem] tracking-label text-muted uppercase md:pt-28">
+        <div data-closing-meta className="nm-wide flex justify-between pt-24 font-mono text-meta tracking-label text-muted uppercase md:pt-28">
           <p>
             <span className="text-accent">N/07</span> — Closing
           </p>
           <p aria-hidden className="max-sm:hidden">Thought → Computation → Construction</p>
         </div>
 
-        <h2 id="closing-title" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.06em]">
+        <h2 id="closing-title" className="nm-wide my-auto text-[clamp(3.6rem,15vw,17rem)] leading-[0.84] font-semibold tracking-[-0.055em]">
           <span data-closing-line="1" className="block whitespace-nowrap">
             Ideas into
           </span>
@@ -67,11 +67,11 @@ export function Closing() {
             <span data-closing-line="2" className="block">
               existence
             </span>
-            <span aria-hidden data-closing-block className="mb-[0.12em] inline-block size-[0.17em] shrink-0 rounded-[0.02em] bg-accent" />
+            <span aria-hidden data-closing-block className="mb-[0.12em] inline-block size-[0.17em] shrink-0 rounded-xs bg-accent" />
           </span>
         </h2>
 
-        <div className="overflow-hidden border-y border-line py-3 font-mono text-[0.6875rem] tracking-label text-subtle uppercase" aria-hidden>
+        <div className="overflow-hidden border-y border-line py-3 font-mono text-meta tracking-label text-subtle uppercase" aria-hidden>
           <div data-ticker className="flex w-max gap-12 whitespace-nowrap">
             {[0, 1].map((copy) => (
               <span key={copy} className="flex gap-12">

@@ -6,6 +6,7 @@ import { art } from "@/lib/art";
 import { ease, gsap, media, ScrollTrigger, useGSAP } from "@/lib/motion";
 import { ConstructedDrawing, openingFocus } from "../constructed-drawing";
 import { ProjectFigure } from "./project-figure";
+import { FigureCaption } from "../figure-caption";
 
 /*
  * Chapter 04. Constructed Forms. On large screens the chapter becomes a
@@ -94,7 +95,7 @@ export function SelectedWork() {
           {/* Intro panel */}
           <div data-reveal-panel className="nm-wide relative flex flex-col gap-10 py-24 lg:motion-safe:w-[88vw] lg:motion-safe:flex-row lg:motion-safe:items-end lg:motion-safe:gap-16 lg:motion-safe:pt-28 lg:motion-safe:pr-[6vw] lg:motion-safe:pb-14 lg:motion-safe:pl-(--nm-gutter) lg:motion-safe:[margin-inline:0]">
             <div className="lg:motion-safe:w-[36vw] lg:motion-safe:shrink-0">
-              <p data-panel-item className="font-mono text-[0.6875rem] tracking-label text-muted uppercase">
+              <p data-panel-item className="font-mono text-meta tracking-label text-muted uppercase">
                 <span className="text-accent">N/04</span> — Selected work
               </p>
               <h2 id="projects-title" data-panel-item className="mt-6 text-statement font-semibold text-balance">
@@ -116,10 +117,10 @@ export function SelectedWork() {
                 <ConstructedDrawing className="absolute inset-3 size-[calc(100%-1.5rem)] md:inset-5 md:size-[calc(100%-2.5rem)]" />
                 <span className="sr-only">{art.constructed.alt}</span>
               </div>
-              <figcaption className="mt-3 flex justify-between gap-4 font-mono text-[0.6875rem] tracking-label text-subtle uppercase">
+              <FigureCaption>
                 <span className="text-accent">Fig. 04 — {art.constructed.title}</span>
                 <span className="max-sm:hidden">Axonometric</span>
-              </figcaption>
+              </FigureCaption>
             </figure>
           </div>
 
@@ -136,7 +137,7 @@ export function SelectedWork() {
                 className="nm-wide relative flex flex-col border-t border-line py-20 lg:motion-safe:w-screen lg:motion-safe:flex-row lg:motion-safe:gap-[5vw] lg:motion-safe:border-t-0 lg:motion-safe:border-l lg:motion-safe:px-[5vw] lg:motion-safe:pt-28 lg:motion-safe:pb-14 lg:motion-safe:[margin-inline:0]"
               >
                 <div className="flex flex-col lg:motion-safe:w-[46vw] lg:motion-safe:shrink-0">
-                  <div data-panel-item className="flex items-center justify-between font-mono text-[0.6875rem] tracking-label uppercase">
+                  <div data-panel-item className="flex items-center justify-between font-mono text-meta tracking-label uppercase">
                     <span className="text-accent">P/{String(index + 1).padStart(2, "0")}</span>
                     <span className="text-muted">{project.kind}</span>
                   </div>

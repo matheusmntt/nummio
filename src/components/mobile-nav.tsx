@@ -129,7 +129,7 @@ export function MobileNav({ items, base = "" }: { items: readonly NavItem[]; bas
             ))}
           </ol>
         </nav>
-        <div data-menu-meta className="nm-wide grid grid-cols-2 gap-4 border-t border-line py-6 font-mono text-[0.6875rem] tracking-label text-subtle uppercase">
+        <div data-menu-meta className="nm-wide grid grid-cols-2 gap-4 border-t border-line py-6 font-mono text-meta tracking-label text-subtle uppercase">
           <p>{site.tagline}</p>
           <p className="text-right">{chapters.length.toString().padStart(2, "0")} chapters · {site.domain}</p>
         </div>

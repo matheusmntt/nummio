@@ -66,7 +66,7 @@ export function Philosophy() {
     <section ref={root} id="about" tabIndex={-1} aria-labelledby="about-title" data-chapter="06" className="relative isolate text-inverse-foreground">
       <div aria-hidden data-surface className="absolute inset-0 -z-10 bg-inverse" />
       <div className="nm-wide py-24 md:py-36">
-        <div className="flex items-center justify-between font-mono text-[0.6875rem] tracking-label text-inverse-muted uppercase">
+        <div className="flex items-center justify-between font-mono text-meta tracking-label text-inverse-muted uppercase">
           <p>
             <span className="text-inverse-accent">N/06</span> — Philosophy
           </p>

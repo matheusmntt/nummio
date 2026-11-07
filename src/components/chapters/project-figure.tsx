@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { ProjectFigure as FigureKind } from "@/content/projects";
 import { duration, ease, gsap, media, useGSAP } from "@/lib/motion";
+import { FigureCaption } from "../figure-caption";
 
 type Node = { x: number; y: number; r: number };
 
@@ -155,10 +156,10 @@ export function ProjectFigure({ kind, caption }: { kind: FigureKind; caption: st
           ))}
         </svg>
       </div>
-      <figcaption className="mt-3 flex justify-between gap-4 font-mono text-[0.6875rem] tracking-label text-subtle uppercase">
+      <FigureCaption>
         <span>{caption}</span>
         <span aria-hidden className="hidden shrink-0 pointer-fine:inline">Hover nodes</span>
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

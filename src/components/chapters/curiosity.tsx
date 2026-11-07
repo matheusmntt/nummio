@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { art, artQuality, crops } from "@/lib/art";
 import { ease, gsap, media, SplitText, useGSAP } from "@/lib/motion";
+import { FigureCaption } from "../figure-caption";
 
 const SLIT = "inset(49% 47% 49% 47% round 0px 0px 0px 0px)";
 const OPEN = "inset(0% 0% 0% 0% round 0px 0px 0px 0px)";
@@ -65,7 +66,7 @@ export function Curiosity() {
         <p
           aria-hidden
           data-ghost
-          className="pointer-events-none absolute -bottom-[0.18em] left-0 text-[34vw] max-md:hidden leading-none font-semibold tracking-[-0.06em] whitespace-nowrap text-transparent select-none opacity-60 [-webkit-text-stroke:1px_var(--nm-border)] md:text-[24vw]"
+          className="pointer-events-none absolute -bottom-[0.18em] left-0 text-[34vw] max-md:hidden leading-none font-semibold tracking-[-0.055em] whitespace-nowrap text-transparent select-none opacity-60 [-webkit-text-stroke:1px_var(--nm-border)] md:text-[24vw]"
         >
           Thought
         </p>
@@ -87,17 +88,17 @@ export function Curiosity() {
             <div aria-hidden className="absolute inset-x-0 -bottom-1 h-1/4 bg-linear-to-t from-plate to-transparent" />
             <div aria-hidden className="absolute inset-y-0 -right-1 w-1/5 bg-linear-to-l from-plate to-transparent" />
           </div>
-          <figcaption className="mt-3 hidden justify-between font-mono text-[0.6875rem] tracking-label text-subtle uppercase md:flex">
+          <FigureCaption className="max-md:hidden">
             <span>
               Fig. 02 — {art.classical.title}
             </span>
             <span>{art.classical.study}</span>
-          </figcaption>
+          </FigureCaption>
         </figure>
 
         <div className="nm-wide relative flex h-full flex-col justify-end pt-[calc(38svh+5rem)] pb-8 md:w-[calc(100%-2*var(--nm-gutter))] md:justify-center md:pt-24 md:pb-16">
           <div className="md:max-w-[calc(56vw-2*var(--nm-gutter)-1.5rem)] lg:max-w-[min(52vw,46rem)]">
-            <p data-kicker className="flex gap-3 overflow-hidden font-mono text-[0.6875rem] tracking-label text-muted uppercase">
+            <p data-kicker className="flex gap-3 overflow-hidden font-mono text-meta tracking-label text-muted uppercase">
               <span className="text-accent">N/02</span>
               <span>Curiosity</span>
               <span className="hidden sm:inline">— Thought, philosophy, context</span>
@@ -109,7 +110,7 @@ export function Curiosity() {
               Curiosity is the starting point. Engineering is how it earns its keep. Reasoning, history and the long
               conversation about how we know things are the context any serious tool is built in.
             </p>
-            <div data-coda className="mt-6 hidden gap-8 border-t border-line pt-5 font-mono text-[0.6875rem] tracking-label text-subtle uppercase sm:flex md:mt-10">
+            <div data-coda className="mt-6 hidden gap-8 border-t border-line pt-5 font-mono text-meta tracking-label text-subtle uppercase sm:flex md:mt-10">
               <p>
                 <span className="text-muted">In</span> Curiosity
               </p>

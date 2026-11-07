@@ -10,6 +10,7 @@ import { RevealText } from "../motion/reveal-text";
 import { Scramble } from "../motion/scramble";
 import { ConstructedDrawing } from "../constructed-drawing";
 import { PlateInstrument } from "../plate-instrument";
+import { FigureCaption } from "../figure-caption";
 
 // Constructed Forms is a drawing rather than a picture; the others are images.
 const plates: Record<Exclude<ArtKey, "constructed">, { src: StaticImageData; focus: string }> = {
@@ -100,7 +101,7 @@ export function Research() {
     >
       <div className="nm-wide">
         <header className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-6">
-          <p className="font-mono text-[0.6875rem] tracking-label text-muted uppercase lg:col-span-12">
+          <p className="font-mono text-meta tracking-label text-muted uppercase lg:col-span-12">
             <span className="text-research">N/05</span> — Research &amp; experiments
           </p>
           <RevealText as="h2" id="research-title" className="text-statement font-semibold text-balance lg:col-span-8">
@@ -142,7 +143,7 @@ export function Research() {
                       >
                         {item.title}
                       </span>
-                      <span className="mt-3 block font-mono text-[0.6875rem] tracking-label text-subtle uppercase">
+                      <span className="mt-3 block font-mono text-meta tracking-label text-subtle uppercase">
                         {item.axes.join(" / ")}
                       </span>
                       <span
@@ -191,7 +192,7 @@ export function Research() {
                     </div>
                   </div>
                 ))}
-                <div className="pointer-events-none absolute inset-0 z-3 flex flex-col justify-between p-4 font-mono text-[0.6875rem] tracking-label uppercase md:p-5">
+                <div className="pointer-events-none absolute inset-0 z-3 flex flex-col justify-between p-4 font-mono text-meta tracking-label uppercase md:p-5">
                   <div className="flex justify-between gap-4">
                     <span className="bg-plate-scrim px-1.5 py-0.5 text-plate-research">
                       <Scramble text={`R/${String(active + 1).padStart(2, "0")} — ${line.title}`} live />
@@ -204,10 +205,10 @@ export function Research() {
                   <PlateInstrument />
                 </div>
               </div>
-              <figcaption className="mt-3 flex justify-between gap-4 font-mono text-[0.6875rem] tracking-label text-subtle uppercase">
+              <FigureCaption>
                 <span>{line.axes.join(" / ")}</span>
                 <span>Specimen {String(active + 1).padStart(2, "0")} / 03</span>
-              </figcaption>
+              </FigureCaption>
             </figure>
           </div>
         </div>

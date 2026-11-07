@@ -69,6 +69,9 @@
   --text-headline: var(--nm-text-4xl);
   --text-headline--line-height: var(--nm-leading-tight);
   --text-headline--letter-spacing: var(--nm-tracking-tight);
+  /* Metadata: mono labels, captions and readouts. */
+  --text-meta: 0.6875rem;
+  --text-meta--line-height: 1.45;
   /* Poster scale: chapter statements that span the viewport. */
   --text-poster: clamp(3.75rem, 13.2vw, 15rem);
   --text-poster--line-height: 0.86;
@@ -152,12 +155,14 @@
       border-color var(--nm-duration-base) var(--nm-ease-standard);
   }
 
-  .nm-button--primary:hover {
-    background: var(--nm-accent-hover);
-  }
+  @media (hover: hover) {
+    .nm-button--primary:hover {
+      background: var(--nm-accent-hover);
+    }
 
-  .nm-button--secondary:hover {
-    border-color: var(--nm-fg);
+    .nm-button--secondary:hover {
+      border-color: var(--nm-fg);
+    }
   }
 
   /* Animated underline: draws in from the left, leaves to the right. */
@@ -180,11 +185,18 @@
     transition: transform 450ms var(--ease-nm-out);
   }
 
-  .nm-link:hover::after,
   .nm-link:focus-visible::after,
   .nm-link[aria-current="true"]::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+
+  /* Hover only where it exists, so a tap never leaves the line drawn. */
+  @media (hover: hover) {
+    .nm-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
   }
 
   /*

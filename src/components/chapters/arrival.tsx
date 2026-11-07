@@ -110,7 +110,7 @@ export function Arrival() {
 
         <div className="nm-wide relative flex h-full flex-col pt-24 pb-6 md:pt-28 md:pb-8">
           {/* Instrument strip */}
-          <div data-fade-early className="grid grid-cols-2 gap-6 font-mono text-[0.6875rem] tracking-label text-muted uppercase md:grid-cols-12">
+          <div data-fade-early className="grid grid-cols-2 gap-6 font-mono text-meta tracking-label text-muted uppercase md:grid-cols-12">
             <p data-intro data-intro-meta className="md:col-span-3">
               <span className="text-accent">N/01</span> — Arrival
             </p>
@@ -165,7 +165,7 @@ export function Arrival() {
               </span>
             </h1>
 
-            <div data-fade-early className="mt-4 flex items-center justify-between gap-6 border-t border-line pt-4 font-mono text-[0.6875rem] tracking-label text-subtle uppercase md:mt-6">
+            <div data-fade-early className="mt-4 flex items-center justify-between gap-6 border-t border-line pt-4 font-mono text-meta tracking-label text-subtle uppercase md:mt-6">
               <ol aria-label="Method" data-intro data-intro-meta className="flex gap-4 md:gap-8">
                 {method.map((step, index) => (
                   <li key={step}>
@@ -176,7 +176,7 @@ export function Arrival() {
               <p data-intro data-intro-meta aria-hidden className="flex items-center gap-3">
                 Scroll
                 <span className="relative block h-px w-10 overflow-hidden bg-line md:w-16">
-                  <span className="absolute inset-0 origin-left bg-accent motion-safe:animate-[nm-scan_2.4s_var(--ease-nm-out)_infinite]" />
+                  <span className="absolute inset-0 origin-left bg-accent motion-safe:animate-[nm-scan_2.4s_var(--ease-nm-out)_4]" />
                 </span>
               </p>
             </div>

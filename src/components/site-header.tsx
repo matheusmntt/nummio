@@ -109,7 +109,7 @@ export function SiteHeader() {
             <p
               hidden={!onHome}
               aria-live="polite"
-              className="hidden overflow-hidden font-mono text-[0.6875rem] tracking-label text-muted uppercase lg:block"
+              className="hidden overflow-hidden font-mono text-meta tracking-label text-muted uppercase lg:block"
             >
               <span className="sr-only">Current chapter: </span>
               <span data-readout className="flex gap-2">
@@ -133,7 +133,7 @@ export function SiteHeader() {
                         aria-current={active === id ? "true" : undefined}
                         className="group inline-flex h-11 items-center gap-1.5 px-3 text-sm font-medium text-muted no-underline transition-colors hover:text-foreground aria-[current=true]:text-foreground"
                       >
-                        <span className="font-mono text-[0.6875rem] text-subtle transition-colors group-hover:text-accent group-aria-[current=true]:text-accent">
+                        <span className="font-mono text-meta text-subtle transition-colors group-hover:text-accent group-aria-[current=true]:text-accent">
                           {String(index + 1).padStart(2, "0")}
                         </span>
                         {item.label}
@@ -167,12 +167,13 @@ export function SiteHeader() {
                 aria-current={active === item.id ? "true" : undefined}
                 className="group flex h-6 items-center justify-end gap-3 no-underline"
               >
-                <span className="pointer-events-none translate-x-2 font-mono text-[0.625rem] tracking-label whitespace-nowrap text-muted uppercase opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                {/* Labels reveal on hover and focus; the active one, and all on touch screens, stay visible. */}
+                <span className="pointer-events-none translate-x-2 font-mono text-meta tracking-label whitespace-nowrap text-muted uppercase opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-aria-[current=true]:translate-x-0 group-aria-[current=true]:text-foreground group-aria-[current=true]:opacity-100 pointer-coarse:translate-x-0 pointer-coarse:opacity-100">
                   {item.index} {item.label}
                 </span>
                 <span
                   data-rail-tick
-                  className="block h-px w-3 origin-right bg-line-strong transition-all duration-500 ease-(--ease-nm-out) group-hover:w-5 group-hover:bg-foreground group-aria-[current=true]:w-7 group-aria-[current=true]:bg-accent"
+                  className="block h-px w-3 origin-right bg-line-strong transition-[width,background-color] duration-500 ease-(--ease-nm-out) group-hover:w-5 group-hover:bg-foreground group-aria-[current=true]:w-7 group-aria-[current=true]:bg-accent"
                 />
               </a>
             </li>

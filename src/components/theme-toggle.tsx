@@ -64,7 +64,7 @@ export function ThemeToggle() {
       title={`Switch to ${next} theme`}
       className="group inline-flex size-11 items-center justify-center rounded-sm border border-line text-foreground transition-colors hover:border-line-strong"
     >
-      <svg aria-hidden viewBox="0 0 20 20" className="size-[18px]">
+      <svg aria-hidden viewBox="0 0 20 20" className="size-5">
         <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" strokeWidth="1.5" />
         <path
           d="M10 2.75a7.25 7.25 0 0 1 0 14.5Z"
