@@ -13,7 +13,8 @@ type ScrollWordsProps = {
 
 /**
  * Reading-paced text: words brighten as the paragraph crosses the viewport,
- * so the scroll position is the reading position.
+ * so the scroll position is the reading position. Words stay plain text for
+ * assistive tech (SplitText's aria-label is not allowed on a paragraph).
  */
 export function ScrollWords({ as: Tag = "p", className, children, dim = 0.16 }: ScrollWordsProps) {
   const ref = useRef<HTMLElement>(null);
@@ -22,7 +23,7 @@ export function ScrollWords({ as: Tag = "p", className, children, dim = 0.16 }: 
     () => {
       const mm = gsap.matchMedia();
       mm.add(media.motion, () => {
-        const split = SplitText.create(ref.current, { type: "words", wordsClass: "nm-word" });
+        const split = SplitText.create(ref.current, { type: "words", wordsClass: "nm-word", aria: "none" });
         gsap.fromTo(
           split.words,
           { opacity: dim },

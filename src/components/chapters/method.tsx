@@ -54,10 +54,11 @@ export function Method() {
             .to(nums[i - 1], { yPercent: -100, duration: 0.3, ease: "power2.in" }, at)
             .to(nums[i], { yPercent: 0, duration: 0.3, ease: ease.out }, at + 0.3)
             .to(details[i - 1], { autoAlpha: 0, y: -24, duration: 0.3, ease: "power2.in" }, at)
-            .to(labels[i - 1], { yPercent: -100, duration: 0.3 }, at)
+            // The caption rolls in one move, outgoing and incoming together, so it is never blank.
+            .to(labels[i - 1], { yPercent: -100, duration: 0.3, ease: "power2.inOut" }, at + 0.2)
             .to(words[i], { yPercent: 0, duration: 0.5, ease: ease.out }, at + 0.3)
             .to(details[i], { autoAlpha: 1, y: 0, duration: 0.4, ease: ease.out }, at + 0.4)
-            .to(labels[i], { yPercent: 0, duration: 0.3 }, at + 0.2)
+            .to(labels[i], { yPercent: 0, duration: 0.3, ease: "power2.inOut" }, at + 0.2)
             .to(figure, { progress: i, duration: 0.9, ease: "power1.inOut" }, at - 0.1)
             .fromTo(bars[i], { scaleX: 0 }, { scaleX: 1, duration: 1.1 }, at);
         }

@@ -3,10 +3,14 @@ export const site = {
   domain: "nummio.dev",
   url: "https://nummio.dev",
   tagline: "Curiosity, engineered.",
+  email: "matheusmdev@outlook.com",
   descriptor: "Independent technology lab",
   description:
     "Nummio is an independent lab for technology, software and applied research. We explore questions, build models to understand them, and engineer tools from what we learn.",
 } as const;
+
+/** Opens the visitor's mail app with a subject already filled in. */
+export const contactHref = `mailto:${site.email}?subject=${encodeURIComponent("A question for Nummio")}`;
 
 export type NavItem = {
   label: string;

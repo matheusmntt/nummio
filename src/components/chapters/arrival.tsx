@@ -12,7 +12,8 @@ const method = ["Explore", "Understand", "Build"] as const;
 
 /*
  * Chapter 01. A live point field (Computational Forms) under poster-scale
- * type. The opening sequence unfurls the field and lifts the headline; on
+ * type. The type rises in CSS with the first paint (see globals.css), so it
+ * never waits for scripts; the opening sequence then unfurls the field. On
  * scroll the headline parts and the camera travels through the field into
  * the darkness where Chapter 02 opens.
  */
@@ -33,15 +34,7 @@ export function Arrival() {
         const intro = gsap.timeline({ defaults: { ease: ease.out } });
         intro
           .fromTo(q("[data-rail]"), { scaleY: 0 }, { scaleY: 1, duration: duration.cinematic, stagger: 0.04, ease: ease.inOut }, 0)
-          .to(state, { intro: 1, duration: 2.6, ease: "power2.inOut" }, 0.1)
-          .fromTo(
-            q("[data-headline-line]"),
-            { yPercent: 108, autoAlpha: 1 },
-            { yPercent: 0, autoAlpha: 1, duration: duration.cinematic, stagger: 0.14 },
-            0.35,
-          )
-          .fromTo(q("[data-intro-meta]"), { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: duration.reveal, stagger: 0.06 }, 0.8)
-          .fromTo(q("[data-intro-copy]"), { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: duration.reveal, stagger: 0.08 }, 1.0);
+          .to(state, { intro: 1, duration: 2.6, ease: "power2.inOut" }, 0.1);
 
         // Scroll: the headline parts, the field is crossed, the frame goes dark.
         const out = gsap.timeline({
@@ -108,19 +101,19 @@ export function Arrival() {
           </div>
         </div>
 
-        <div className="nm-wide relative flex h-full flex-col pt-24 pb-6 md:pt-28 md:pb-8">
+        <div className="nm-wide relative flex h-full flex-col pt-24 pb-6 motion-reduce:min-h-svh md:pt-28 md:pb-8">
           {/* Instrument strip */}
           <div data-fade-early className="grid grid-cols-2 gap-6 font-mono text-meta tracking-label text-muted uppercase md:grid-cols-12">
-            <p data-intro data-intro-meta className="md:col-span-3">
+            <p data-intro-meta className="md:col-span-3">
               <span className="text-accent">N/01</span> — Arrival
             </p>
-            <p data-intro data-intro-meta className="max-md:text-right md:col-span-3">
+            <p data-intro-meta className="max-md:text-right md:col-span-3">
               {site.descriptor}
             </p>
-            <p data-intro data-intro-meta aria-hidden className="hidden tabular-nums md:col-span-3 md:block">
-              Field — {art.computational.title}
+            <p data-intro-meta aria-hidden className="hidden tabular-nums md:col-span-3 md:block">
+              Fig. 01 — {art.computational.title}
             </p>
-            <p data-intro data-intro-meta aria-hidden className="hidden text-right tabular-nums pointer-fine:md:block md:col-span-3">
+            <p data-intro-meta aria-hidden className="hidden text-right tabular-nums pointer-fine:md:block md:col-span-3">
               <span ref={readout}>x +0.000  y +0.000</span>
             </p>
           </div>
@@ -128,11 +121,11 @@ export function Arrival() {
           <div className="mt-auto">
             <div className="grid gap-8 md:grid-cols-12 md:items-end">
               <div data-fade-early className="relative before:pointer-events-none before:absolute before:-inset-x-16 before:-inset-y-12 before:-z-10 before:bg-[radial-gradient(closest-side,var(--nm-bg)_45%,transparent)] md:col-span-5 md:col-start-8 lg:col-span-4 lg:col-start-9">
-                <p data-intro data-intro-copy className="max-w-sm text-base text-muted md:text-lg">
+                <p data-intro-copy className="max-w-sm text-base text-muted md:text-lg">
                   Nummio is an independent lab for software and applied research. We follow questions until they become
                   models, and models until they become tools.
                 </p>
-                <div data-intro data-intro-copy className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div data-intro-copy className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <Magnetic>
                     <a href="#approach" className="nm-button nm-button--primary group">
                       Our approach
@@ -151,14 +144,14 @@ export function Arrival() {
             <h1 id="hero-title" data-headline className="mt-8 text-[15vw] leading-[0.86] font-semibold tracking-[-0.055em] md:mt-4 md:text-poster">
               <span className="block overflow-y-clip pb-[0.06em]">
                 <span data-part="left" className="block">
-                  <span data-intro data-headline-line className="block">
+                  <span data-headline-line="1" className="block">
                     Curiosity,
                   </span>
                 </span>
               </span>
               <span className="-mt-[0.06em] block overflow-y-clip pb-[0.08em] md:text-right">
                 <span data-part="right" className="block">
-                  <span data-intro data-headline-line className="block text-accent">
+                  <span data-headline-line="2" className="block text-accent">
                     engineered<span className="text-foreground">.</span>
                   </span>
                 </span>
@@ -166,14 +159,14 @@ export function Arrival() {
             </h1>
 
             <div data-fade-early className="mt-4 flex items-center justify-between gap-6 border-t border-line pt-4 font-mono text-meta tracking-label text-subtle uppercase md:mt-6">
-              <ol aria-label="Method" data-intro data-intro-meta className="flex gap-4 md:gap-8">
+              <ol aria-label="Method" data-intro-meta className="flex gap-4 md:gap-8">
                 {method.map((step, index) => (
                   <li key={step}>
                     <span className="text-muted">{String(index + 1).padStart(2, "0")}</span> {step}
                   </li>
                 ))}
               </ol>
-              <p data-intro data-intro-meta aria-hidden className="flex items-center gap-3">
+              <p data-intro-meta aria-hidden className="flex items-center gap-3">
                 Scroll
                 <span className="relative block h-px w-10 overflow-hidden bg-line md:w-16">
                   <span className="absolute inset-0 origin-left bg-accent motion-safe:animate-[nm-scan_2.4s_var(--ease-nm-out)_4]" />

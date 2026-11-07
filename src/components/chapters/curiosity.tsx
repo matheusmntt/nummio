@@ -30,7 +30,8 @@ export function Curiosity() {
 
       mm.add(media.motion, () => {
         const statement = SplitText.create(q("[data-statement]"), { type: "words", mask: "words" });
-        const reading = SplitText.create(q("[data-reading]"), { type: "words" });
+        // Word splits stay readable as plain text; an aria-label is not allowed on a <p>.
+        const reading = SplitText.create(q("[data-reading]"), { type: "words", aria: "none" });
         const levels = q("[data-dither-level]") as HTMLCanvasElement[];
         const readout = q("[data-cell-readout]")[0] as HTMLElement;
         const resolve = { step: 0 };

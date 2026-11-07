@@ -1,5 +1,5 @@
 import { cacheLife } from "next/cache";
-import { primaryNav, site } from "@/content/site";
+import { contactHref, primaryNav, site } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { EditorialLabel } from "./editorial-label";
 import { Rise } from "./motion/rise";
@@ -41,8 +41,16 @@ export function SiteFooter() {
           </nav>
 
           <div className="md:col-span-3">
-            <EditorialLabel as="p">Lab</EditorialLabel>
+            <EditorialLabel as="p">Contact</EditorialLabel>
             <ul className="mt-4 text-muted">
+              <li>
+                <a
+                  href={contactHref}
+                  className="inline-flex min-h-11 items-center text-foreground no-underline transition-colors hover:text-accent"
+                >
+                  {site.email}
+                </a>
+              </li>
               <li>
                 <a
                   href={site.url}
