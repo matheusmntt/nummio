@@ -28,22 +28,18 @@ for (const [from, to] of copies) {
 }
 
 /*
- * Web crops of the visual studies: the kit's text-free `raw/` renders and
- * WQHD wallpapers (never the captioned studies; wallpaper regions stop above
- * the kit's signature in the bottom-right corner), plus the lab's own masters
- * in assets/studies. Rectangles are in master pixels.
+ * Web crops of the kit's visual studies: the text-free `raw/` renders and
+ * WQHD wallpapers, never the captioned studies; wallpaper regions stop above
+ * the kit's signature in the bottom-right corner. Rectangles are in master
+ * pixels.
  *
  * `grade` lifts the master's blacks to the brand graphite, so the artwork's
- * ground matches the page and plates exactly. `upscale` resamples small
- * masters 2× with Lanczos and light sharpening, so browsers downsample a
- * clean image instead of stretching a small one.
+ * ground matches the page exactly.
  */
 const GRAPHITE = { r: 11, g: 15, b: 20 };
 const imagery = join(kit, "imagery");
-const studies = join(root, "assets/studies");
 
 const crops = [
-  { dir: studies, from: "classical-sculpture.png", to: "classical-sculpture.jpg", grade: true, upscale: true },
   {
     from: "wallpapers/wallpaper-03-computational-manifold-2560x1440.jpg",
     to: "computational-wide.jpg",
@@ -55,8 +51,8 @@ const crops = [
 const artDir = join(root, "src/assets/art");
 mkdirSync(artDir, { recursive: true });
 
-for (const { dir = imagery, from, to, region, grade = false, upscale = false } of crops) {
-  let image = sharp(join(dir, from)).removeAlpha();
+for (const { from, to, region, grade = false } of crops) {
+  let image = sharp(join(imagery, from)).removeAlpha();
   if (region) image = image.extract(region);
   let buffer = await image.toBuffer();
   if (grade) {
@@ -65,11 +61,6 @@ for (const { dir = imagery, from, to, region, grade = false, upscale = false } o
       .composite([{ input: { create: { width, height, channels: 3, background: GRAPHITE } }, blend: "lighten" }])
       .toBuffer();
   }
-  let output = sharp(buffer);
-  if (upscale) {
-    const { width } = await sharp(buffer).metadata();
-    output = output.resize({ width: width * 2, kernel: "lanczos3" }).sharpen({ sigma: 0.9, m1: 0.6, m2: 1.4 });
-  }
-  await output.jpeg({ quality: 92, mozjpeg: true }).toFile(join(artDir, to));
+  await sharp(buffer).jpeg({ quality: 92, mozjpeg: true }).toFile(join(artDir, to));
   console.log(`imagery: ${from} -> src/assets/art/${to}`);
 }
