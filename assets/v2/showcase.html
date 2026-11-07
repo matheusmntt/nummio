@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="signal-core">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nummio Brand & UI/UX System v2.0 — Interactive Explorer</title>
+  <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./system/tokens.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--nummio-font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color var(--duration-normal) var(--ease-out-expo), color var(--duration-normal) var(--ease-out-expo);
+      overflow-x: hidden;
+    }
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 100%);
+      z-index: 0;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-glass-heavy);
+      backdrop-filter: var(--backdrop-blur);
+      border-bottom: 1px solid var(--border-default);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .badge {
+      font-family: var(--nummio-font-mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-primary-subtle);
+      color: var(--accent-primary);
+      border: 1px solid var(--border-default);
+      font-weight: 600;
+    }
+    .theme-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface-2);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-default);
+    }
+    .theme-btn {
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all var(--duration-micro) var(--ease-out-expo);
+    }
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface-3);
+    }
+    .theme-btn.active {
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+    .swatch-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 56px 32px 96px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .hero h1 {
+      font-family: var(--nummio-font-display);
+      font-size: var(--text-display);
+      letter-spacing: var(--tracking-tight);
+      line-height: 1.04;
+      margin: 16px 0 20px;
+    }
+    .hero h1 span {
+      color: var(--accent-primary);
+    }
+    .hero p {
+      color: var(--text-secondary);
+      font-size: var(--text-lg);
+      max-width: 580px;
+      margin-bottom: 28px;
+    }
+    .ui-sandbox {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .ui-sandbox::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--bg-spotlight);
+      pointer-events: none;
+    }
+    .sandbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .metric-card {
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+    .metric-card .label {
+      font-family: var(--nummio-font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .metric-card .val {
+      font-family: var(--nummio-font-mono);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--accent-primary);
+      color: var(--text-on-accent);
+      font-family: var(--nummio-font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: transform var(--duration-micro) var(--ease-out-expo), background var(--duration-micro);
+    }
+    .btn-primary:hover {
+      background: var(--accent-primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: var(--bg-surface-3);
+      color: var(--text-primary);
+      font-family: var(--nummio-font-mono);
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-default);
+      cursor: pointer;
+    }
+    section {
+      margin-bottom: 72px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 14px;
+    }
+    .section-head h2 {
+      font-family: var(--nummio-font-display);
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .section-head span {
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      color: var(--accent-primary);
+    }
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 16px;
+    }
+    .token-card {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      transition: border-color var(--duration-fast), transform var(--duration-micro);
+    }
+    .token-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    .token-preview {
+      height: 72px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-default);
+      margin-bottom: 12px;
+    }
+    .token-name {
+      font-family: var(--nummio-font-mono);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .token-var {
+      font-family: var(--nummio-font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .studies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .studies-grid { grid-template-columns: 1fr; }
+    }
+    .study-card {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--duration-fast) var(--ease-out-expo), border-color var(--duration-fast);
+    }
+    .study-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+    }
+    .study-card img {
+      width: 100%;
+      display: block;
+    }
+    .study-meta {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .logo-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .logo-box {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      gap: 18px;
+    }
+    .logo-box img {
+      max-height: 76px;
+      max-width: 100%;
+    }
+    .logo-box span {
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-surface-3);
+      color: var(--text-primary);
+      border: 1px solid var(--accent-primary);
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-family: var(--nummio-font-mono);
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 180ms var(--ease-out-expo);
+      pointer-events: none;
+      z-index: 100;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <header>
+    <div class="brand-bar">
+      <img src="./icons/nummio-symbol-tile.svg" alt="Nummio Symbol" width="34" height="34" />
+      <strong style="font-family: var(--nummio-font-display); font-size: 18px; letter-spacing: -0.02em;">nummio<span style="color: var(--accent-primary);">.</span></strong>
+      <span class="badge">Brand & UI/UX System v2.0</span>
+    </div>
+    <div class="theme-switcher" role="group" aria-label="Color Token Theme Switcher">
+      <button class="theme-btn active" data-set-theme="signal-core">
+        <span class="swatch-dot" style="background:#B7FF63;"></span>01 Signal Core (Default)
+      </button>
+      <button class="theme-btn" data-set-theme="cyber-infrared">
+        <span class="swatch-dot" style="background:#FF5526;"></span>02 Cyber Infrared (Alt A)
+      </button>
+      <button class="theme-btn" data-set-theme="quantum-cyan">
+        <span class="swatch-dot" style="background:#00F0FF;"></span>03 Quantum Cyan (Alt B)
+      </button>
+      <button class="theme-btn" data-set-theme="architectural-bone">
+        <span class="swatch-dot" style="background:#58B800;"></span>04 Architectural Bone (Light)
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <span class="badge">CURIOSITY, ENGINEERED // NUMMIO.DEV</span>
+        <h1>High-Performance <span>UI/UX Identity.</span></h1>
+        <p>Sistema de identidade visual e arquitetura de design tokens v2.0 para a Nummio. Inclui geometria óptica refinada, 4 temas de tokens intercambiáveis em tempo real e estudos de direção de arte em resolução de estúdio.</p>
+        <div class="btn-row">
+          <button class="btn-primary" onclick="cycleTheme()">Alternar Tema de Cor (⌘J)</button>
+          <a href="./system/tokens.css" target="_blank" class="btn-ghost" style="text-decoration:none;">Ver tokens.css</a>
+          <a href="./system/prompts.md" target="_blank" class="btn-ghost" style="text-decoration:none;">Ver Prompts v2</a>
+        </div>
+      </div>
+
+      <div class="ui-sandbox">
+        <div class="sandbox-header">
+          <span>LIVE UI TELEMETRY // 120HZ SANDBOX</span>
+          <span style="color: var(--accent-primary);">● ONLINE</span>
+        </div>
+        <div class="metric-row">
+          <div class="metric-card">
+            <div class="label">Frame Budget</div>
+            <div class="val" id="fps-val">0.38ms</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Contrast Ratio</div>
+            <div class="val">16.8:1</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Active Theme</div>
+            <div class="val" id="theme-code" style="color:var(--accent-primary); font-size:15px;">SIGNAL</div>
+          </div>
+        </div>
+        <div style="background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; font-family: var(--nummio-font-mono); font-size: 12px; color: var(--text-secondary);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="color:var(--text-primary);">shader_pipeline.wgsl</span>
+            <span style="color:var(--accent-secondary);">P3-D65 · READY</span>
+          </div>
+          <div>transition: transform 110ms cubic-bezier(0.16, 1, 0.3, 1);</div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2>01. Arquitetura de Tokens de Cor (Clique para copiar)</h2>
+        <span>CORE PRESERVADO + 3 ALTERNATIVAS DE TEMA</span>
+      </div>
+      <div class="token-grid">
+        <div class="token-card" onclick="copyVar('--nummio-graphite')">
+          <div class="token-preview" style="background: var(--nummio-graphite);"></div>
+          <div class="token-name">Canvas / Graphite</div>
+          <div class="token-var">--nummio-graphite</div>
+        </div>
+        <div class="token-card" onclick="copyVar('--nummio-charcoal')">
+          <div class="token-preview" style="background: var(--nummio-charcoal);"></div>
+          <div class="token-name">Surface / Charcoal</div>
+          <div class="token-var">--nummio-charcoal</div>
+        </div>
+        <div class="token-card" onclick="copyVar('--nummio-bone')">
+          <div class="token-preview" style="background: var(--nummio-bone);"></div>
+          <div class="token-name">Primary Ink / Bone</div>
+          <div class="token-var">--nummio-bone</div>
+        </div>
+        <div class="token-card" onclick="copyVar('--nummio-signal')">
+          <div class="token-preview" style="background: var(--nummio-signal);"></div>
+          <div class="token-name">Primary Signal CTA</div>
+          <div class="token-var">--nummio-signal</div>
+        </div>
+        <div class="token-card" onclick="copyVar('--nummio-iris')">
+          <div class="token-preview" style="background: var(--nummio-iris);"></div>
+          <div class="token-name">Secondary / Iris</div>
+          <div class="token-var">--nummio-iris</div>
+        </div>
+        <div class="token-card" onclick="copyVar('--nummio-steel')">
+          <div class="token-preview" style="background: var(--nummio-steel);"></div>
+          <div class="token-name">Muted / Steel</div>
+          <div class="token-var">--nummio-steel</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>02. Sistema de Logos & Monograma Óptico v2.0</h2>
+        <span>NEGATIVE-SPACE CUTOUT & UNIFICAÇÃO GEOMÉTRICA</span>
+      </div>
+      <div class="logo-comparison">
+        <div class="logo-box" style="background:#0B0F14;">
+          <img src="./logo/nummio-lockup-dark.svg" alt="Nummio Lockup Dark" />
+          <span>logo/nummio-lockup-dark.svg</span>
+        </div>
+        <div class="logo-box" style="background:#0B0F14;">
+          <img src="./icons/nummio-symbol-tile.svg" alt="Nummio Symbol Tile" />
+          <span>icons/nummio-symbol-tile.svg (Optical Cutout v2)</span>
+        </div>
+        <div class="logo-box" style="background:#090B0E;">
+          <img src="./logo/nummio-wordmark-infrared.svg" alt="Nummio Wordmark Infrared" />
+          <span>logo/nummio-wordmark-infrared.svg (Alt A)</span>
+        </div>
+        <div class="logo-box" style="background:#070B12;">
+          <img src="./logo/nummio-wordmark-cyan.svg" alt="Nummio Wordmark Cyan" />
+          <span>logo/nummio-wordmark-cyan.svg (Alt B)</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>03. Direções Visuais & Estudos de Arte (1600×1000)</h2>
+        <span>4 PILARES: CLASSICAL · COMPUTATIONAL · CONSTRUCTED · KINETIC UI</span>
+      </div>
+      <div class="studies-grid">
+        <div class="study-card">
+          <img src="./imagery/classical-intelligence.jpg" alt="Study 01 - Classical Intelligence" />
+          <div class="study-meta">
+            <span>STUDY 01 // CLASSICAL INTELLIGENCE</span>
+            <a href="./imagery/raw/classical-intelligence-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/computational-forms.jpg" alt="Study 02 - Computational Forms" />
+          <div class="study-meta">
+            <span>STUDY 02 // COMPUTATIONAL FORMS</span>
+            <a href="./imagery/raw/computational-forms-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/constructed-forms.jpg" alt="Study 03 - Constructed Forms" />
+          <div class="study-meta">
+            <span>STUDY 03 // CONSTRUCTED FORMS</span>
+            <a href="./imagery/raw/constructed-forms-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/interface-systems.jpg" alt="Study 04 - Kinetic Interfaces" />
+          <div class="study-meta">
+            <span>STUDY 04 // KINETIC INTERFACES (NEW)</span>
+            <a href="./imagery/raw/interface-systems-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/optical-typography.jpg" alt="Study 05 - Optical Typography" />
+          <div class="study-meta">
+            <span>STUDY 05 // OPTICAL TYPOGRAPHY PRISM</span>
+            <a href="./imagery/raw/optical-typography-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/tactile-hardware.jpg" alt="Study 06 - Tactile Precision" />
+          <div class="study-meta">
+            <span>STUDY 06 // TACTILE PRECISION (0.1MS)</span>
+            <a href="./imagery/raw/tactile-hardware-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/neural-topology.jpg" alt="Study 07 - Neural Topology" />
+          <div class="study-meta">
+            <span>STUDY 07 // NEURAL & GRAPH TOPOLOGY</span>
+            <a href="./imagery/raw/neural-topology-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/cymatic-resonance.jpg" alt="Study 08 - Cymatic Resonance" />
+          <div class="study-meta">
+            <span>STUDY 08 // CYMATIC RESONANCE</span>
+            <a href="./imagery/raw/cymatic-resonance-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/theme-cyber-infrared.jpg" alt="Study 09 - Cyber Infrared Telemetry" />
+          <div class="study-meta">
+            <span>STUDY 09 // THEME 02: CYBER INFRARED</span>
+            <a href="./imagery/raw/theme-cyber-infrared-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/theme-quantum-cyan.jpg" alt="Study 10 - Quantum Cyan Manifold" />
+          <div class="study-meta">
+            <span>STUDY 10 // THEME 03: QUANTUM CYAN</span>
+            <a href="./imagery/raw/theme-quantum-cyan-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/theme-architectural-bone.jpg" alt="Study 11 - Architectural Daylight" />
+          <div class="study-meta">
+            <span>STUDY 11 // THEME 04: ARCHITECTURAL DAYLIGHT</span>
+            <a href="./imagery/raw/theme-architectural-bone-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+        <div class="study-card">
+          <img src="./imagery/algorithmic-blueprint.jpg" alt="Study 12 - Algorithmic Blueprint" />
+          <div class="study-meta">
+            <span>STUDY 12 // ALGORITHMIC CAD BLUEPRINT</span>
+            <a href="./imagery/raw/algorithmic-blueprint-raw.jpg" target="_blank" style="color:var(--accent-primary);">Abrir Raw Sem Texto ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>04. Social Cards Multi-Tema & Wallpapers 2560×1440</h2>
+        <span>OPEN GRAPH VARIATIONS · GITHUB BANNERS · WQHD WALLPAPERS</span>
+      </div>
+      <div class="studies-grid">
+        <div class="study-card">
+          <img src="./social/open-graph-1200x630.png" alt="Open Graph v1 Kinetic" />
+          <div class="study-meta"><span>social/open-graph-1200x630.png</span></div>
+        </div>
+        <div class="study-card">
+          <img src="./social/open-graph-v2-optical-prism-1200x630.png" alt="Open Graph v2 Optical Prism" />
+          <div class="study-meta"><span>social/open-graph-v2-optical-prism-1200x630.png</span></div>
+        </div>
+        <div class="study-card">
+          <img src="./social/open-graph-v3-cyber-infrared-1200x630.png" alt="Open Graph v3 Cyber Infrared" />
+          <div class="study-meta"><span>social/open-graph-v3-cyber-infrared-1200x630.png</span></div>
+        </div>
+        <div class="study-card">
+          <img src="./social/open-graph-v4-quantum-cyan-1200x630.png" alt="Open Graph v4 Quantum Cyan" />
+          <div class="study-meta"><span>social/open-graph-v4-quantum-cyan-1200x630.png</span></div>
+        </div>
+        <div class="study-card">
+          <img src="./social/open-graph-v5-tactile-hardware-1200x630.png" alt="Open Graph v5 Tactile" />
+          <div class="study-meta"><span>social/open-graph-v5-tactile-hardware-1200x630.png</span></div>
+        </div>
+        <div class="study-card">
+          <img src="./social/color-tokens-themes-1600x900.png" alt="Color Token Themes Matrix" />
+          <div class="study-meta"><span>social/color-tokens-themes-1600x900.png</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast">Token copiado!</div>
+
+  <script>
+    const themes = ["signal-core", "cyber-infrared", "quantum-cyan", "architectural-bone"];
+    const themeLabels = {
+      "signal-core": "SIGNAL",
+      "cyber-infrared": "INFRARED",
+      "quantum-cyan": "QUANTUM",
+      "architectural-bone": "DAYLIGHT"
+    };
+
+    function setTheme(t) {
+      document.documentElement.setAttribute("data-theme", t);
+      document.querySelectorAll(".theme-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.setTheme === t);
+      });
+      document.getElementById("theme-code").textContent = themeLabels[t];
+    }
+
+    document.querySelectorAll(".theme-btn").forEach(btn => {
+      btn.addEventListener("click", () => setTheme(btn.dataset.setTheme));
+    });
+
+    function cycleTheme() {
+      const cur = document.documentElement.getAttribute("data-theme") || "signal-core";
+      const next = themes[(themes.indexOf(cur) + 1) % themes.length];
+      setTheme(next);
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "j") {
+        e.preventDefault();
+        cycleTheme();
+      }
+    });
+
+    function copyVar(v) {
+      const computed = getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+      navigator.clipboard.writeText(`var(${v}) /* ${computed} */`);
+      const toast = document.getElementById("toast");
+      toast.textContent = `Copiado: var(${v}) → ${computed}`;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+  </script>
+</body>
+</html>
