@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "check": "pnpm lint && pnpm typecheck && pnpm build",
     "brand:sync": "node scripts/sync-brand-assets.mjs",
+    "brand:mascot": "node scripts/render-mascot.mjs",
     "social:render": "node scripts/render-social.mjs"
   },
   "dependencies": {
