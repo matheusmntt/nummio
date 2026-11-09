@@ -38,6 +38,7 @@ Escopo do site: o nummio.dev é construído como uma interface de alta performan
 - `system/`: `tokens.css`, `tokens.json`, `brand-guidelines.md`, `prompts.md` e `fonts-links.md`.
 - `showcase.html`: Aplicação interativa de demonstração do Brand Kit & Design System v2.0.
 - `studies/`: masters próprios do laboratório (fora do kit), com procedência em `studies/README.md`.
+- `mascot/`: o **Nou**, mascote da Nummio (o módulo Signal ganhando vida), em 9 humores, com conceito e regras em `mascot/README.md`. Gerado por `pnpm brand:mascot`.
 
 No site, `pnpm brand:sync` gera os ícones, o card social e os recortes web a partir desta pasta. Os tokens CSS que o site usa ficam em `src/styles/` (o `system/tokens.css` daqui é a referência multi-tema do kit).
 
